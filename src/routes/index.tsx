@@ -34,19 +34,14 @@ function Checkout() {
   const [codeApplied, setCodeApplied] = useState<string | null>(null);
   const [fourOff, setFourOff] = useState(true);
 
-  const subtotal = 103.22;
-  const codeDiscount = codeApplied ? +(subtotal * 0.85).toFixed(2) : 0;
+  const subtotal = 82.22;
   const deliveryFee = 0;
   const otherFees = 5.18;
   const taxes = 9.6;
-  const total = +(
-    subtotal -
-    codeDiscount +
-    deliveryFee +
-    otherFees +
-    taxes
-  ).toFixed(2);
-  const originalTotal = 136.73;
+  const baseTotal = +(subtotal + deliveryFee + otherFees + taxes).toFixed(2);
+  const codeDiscount = codeApplied ? +(baseTotal * 0.85).toFixed(2) : 0;
+  const total = +(baseTotal - codeDiscount).toFixed(2);
+  const originalTotal = baseTotal + 22.51;
 
   const savingsLabel = codeApplied
     ? "Uber One, promotions & promo code"
