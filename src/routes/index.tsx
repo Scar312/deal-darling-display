@@ -34,19 +34,14 @@ function Checkout() {
   const [codeApplied, setCodeApplied] = useState<string | null>(null);
   const [fourOff, setFourOff] = useState(true);
 
-  const subtotal = 103.22;
-  const codeDiscount = codeApplied ? +(subtotal * 0.85).toFixed(2) : 0;
+  const subtotal = 82.22;
   const deliveryFee = 0;
   const otherFees = 5.18;
   const taxes = 9.6;
-  const total = +(
-    subtotal -
-    codeDiscount +
-    deliveryFee +
-    otherFees +
-    taxes
-  ).toFixed(2);
-  const originalTotal = 136.73;
+  const baseTotal = +(subtotal + deliveryFee + otherFees + taxes).toFixed(2);
+  const codeDiscount = codeApplied ? +(baseTotal * 0.85).toFixed(2) : 0;
+  const total = +(baseTotal - codeDiscount).toFixed(2);
+  const originalTotal = baseTotal + 22.51;
 
   const savingsLabel = codeApplied
     ? "Uber One, promotions & promo code"
@@ -224,7 +219,7 @@ function Checkout() {
         <PriceRow label="Subtotal" value={money(subtotal)} bold />
         {codeApplied && (
           <div className="flex items-center justify-between py-2">
-            <span className="text-[16px] font-semibold">Promotion</span>
+            <span className="text-[16px] font-semibold">mastersaver.site discount</span>
             <span className="rounded-md bg-[#e01a2b] px-2 py-0.5 text-[15px] font-semibold text-white">
               -{money(codeDiscount)}
             </span>
@@ -265,7 +260,7 @@ function Checkout() {
 
         {/* Payment */}
         <button className="mt-4 flex w-full items-center gap-3 py-1">
-          <img src={applePayImg} alt="Apple Pay" className="h-7 w-11 object-contain" />
+          <img src={applePayImg} alt="Apple Pay" className="h-7 w-11 rounded-md object-contain shadow-[0_2px_8px_rgba(0,0,0,0.18)] ring-1 ring-black/5" />
           <span className="flex-1 text-left text-[16px] font-semibold">Apple Pay</span>
           <ChevronRight className="h-5 w-5 text-[#9a9a9a]" strokeWidth={2.5} />
         </button>
