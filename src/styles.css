@@ -141,7 +141,8 @@
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: "Equitan Sans", "Barlow", "Rubik", ui-sans-serif, system-ui, sans-serif;
-    font-weight: 500;
+    font-weight: 700;
+    font-stretch: 100%;
     -webkit-font-smoothing: antialiased;
   }
 }
