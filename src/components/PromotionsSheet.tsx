@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { X, ArrowLeft } from "lucide-react";
 import saladImg from "@/assets/uber/bogo.png";
 
@@ -25,6 +25,25 @@ export function PromotionsSheet({
 }: PromotionsSheetProps) {
   const [promoMode, setPromoMode] = useState(false);
   const [code, setCode] = useState("");
+  const [viewportHeight, setViewportHeight] = useState<number | null>(null);
+
+  // Track the visual viewport so the sheet (and the Add promo button)
+  // shrinks and stays visible when the mobile keyboard opens.
+  useEffect(() => {
+    const vv = window.visualViewport;
+    if (!vv) return;
+    const update = () => {
+      const keyboardOpen = vv.height < window.innerHeight - 80;
+      setViewportHeight(keyboardOpen ? vv.height : null);
+    };
+    vv.addEventListener("resize", update);
+    vv.addEventListener("scroll", update);
+    update();
+    return () => {
+      vv.removeEventListener("resize", update);
+      vv.removeEventListener("scroll", update);
+    };
+  }, []);
 
   const closeAll = () => {
     setPromoMode(false);
@@ -42,7 +61,8 @@ export function PromotionsSheet({
 
   return (
     <div
-      className={`fixed inset-0 z-50 mx-auto flex w-full max-w-[480px] flex-col bg-white transition-transform duration-300 ease-out ${
+      style={viewportHeight ? { height: viewportHeight } : undefined}
+      className={`fixed inset-x-0 top-0 z-50 mx-auto flex h-[100dvh] w-full max-w-[480px] flex-col bg-white transition-transform duration-300 ease-out ${
         open ? "translate-y-0" : "pointer-events-none translate-y-full"
       }`}
     >
@@ -61,7 +81,7 @@ export function PromotionsSheet({
       </div>
 
       {promoMode ? (
-        <div className="flex flex-1 flex-col overflow-y-auto px-4 pt-1">
+        <div className="flex min-h-0 flex-1 flex-col px-4 pt-1">
           <div className="flex items-center gap-3 rounded-full bg-[#f3f3f3] px-4 py-3">
             <button onClick={() => setPromoMode(false)} aria-label="Back">
               <ArrowLeft className="h-5 w-5" strokeWidth={2.5} />
@@ -74,12 +94,15 @@ export function PromotionsSheet({
               className="flex-1 bg-transparent text-[16px] font-medium text-foreground placeholder:text-[#6b6b6b] focus:outline-none"
             />
           </div>
-          <button
-            onClick={handleAdd}
-            className="mt-6 w-full rounded-xl bg-black py-3.5 text-[16px] font-semibold text-white active:opacity-90"
-          >
-            Add promo
-          </button>
+          {/* Add promo pinned at the bottom; stays above the keyboard */}
+          <div className="mt-auto pb-4 pt-3">
+            <button
+              onClick={handleAdd}
+              className="w-full rounded-xl bg-black py-3.5 text-[16px] font-semibold text-white active:opacity-90"
+            >
+              Add promo
+            </button>
+          </div>
         </div>
       ) : (
         <div className="flex-1 overflow-y-auto px-4 pb-8">
