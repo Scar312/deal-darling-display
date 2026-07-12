@@ -19,6 +19,7 @@ import couponImg from "@/assets/uber/coupon.png";
 import priorityImg from "@/assets/uber/priority.png";
 import uberOneImg from "@/assets/uber/uberone.png";
 import applePayImg from "@/assets/uber/applepay.png";
+import footerMarkImg from "@/assets/uber/footermark.png";
 
 export const Route = createFileRoute("/")({
   component: Checkout,
@@ -273,7 +274,7 @@ function Checkout() {
       {/* Bottom sticky */}
       <div className="fixed inset-x-0 bottom-0 z-20 mx-auto w-full max-w-[480px] bg-background">
         <div className="flex items-center gap-2 bg-[#9a6a12] px-4 py-2.5">
-          <UberOneMark img={uberOneImg} light />
+          <img src={footerMarkImg} alt="" className="h-5 w-5 shrink-0 object-contain" />
           <span className="text-[14px] font-bold text-white">
             Saving ${(codeDiscount + 18.73).toFixed(2)} with {savingsLabel}
           </span>
