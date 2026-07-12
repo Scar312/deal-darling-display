@@ -77,7 +77,7 @@ export function PromotionsSheet({
             <X className="h-6 w-6" strokeWidth={2.5} />
           </button>
         )}
-        <h2 className="text-[17px] font-bold">Promotions</h2>
+        <h2 className="text-[17px] font-semibold">Promotions</h2>
       </div>
 
       {promoMode ? (
@@ -118,7 +118,7 @@ export function PromotionsSheet({
           {codeApplied && (
             <div className="mt-4 flex items-center justify-between rounded-xl border border-[#111] bg-white px-4 py-3">
               <div>
-                <div className="text-[15px] font-bold">Promo code applied</div>
+                <div className="text-[15px] font-semibold">Promo code applied</div>
                 <div className="text-[13px] text-[#5a5a5a]">
                   Code: {codeApplied} · 85% off
                 </div>
@@ -135,7 +135,7 @@ export function PromotionsSheet({
 
           {/* Stackable */}
           <div className="mt-6">
-            <h3 className="text-[19px] font-extrabold leading-tight">
+            <h3 className="text-[19px] font-semibold leading-tight">
               Promotions you can stack
             </h3>
             <p className="mt-0.5 text-[14px] font-semibold text-[#3a3a3a]">
@@ -145,7 +145,7 @@ export function PromotionsSheet({
             <div className="mt-3 rounded-2xl border border-[#e6e6e6] bg-[#fafafa] p-4">
               <div className="flex items-start justify-between gap-3">
                 <div className="flex-1">
-                  <div className="text-[22px] font-extrabold leading-tight">
+                  <div className="text-[22px] font-semibold leading-tight">
                     Buy 1, get 1 free
                   </div>
                   <p className="mt-1.5 text-[14px] leading-snug text-[#5a5a5a]">
@@ -168,7 +168,7 @@ export function PromotionsSheet({
 
           {/* One-per-order */}
           <div className="mt-6">
-            <h3 className="text-[19px] font-extrabold leading-tight">
+            <h3 className="text-[19px] font-semibold leading-tight">
               One-per-order promotions
             </h3>
             <p className="mt-0.5 text-[14px] font-semibold text-[#3a3a3a]">
@@ -178,7 +178,7 @@ export function PromotionsSheet({
             <div className="mt-3 rounded-2xl border-2 border-black bg-white p-4">
               <div className="flex items-start justify-between gap-3">
                 <div className="flex-1">
-                  <div className="text-[22px] font-extrabold leading-tight">$4 off</div>
+                  <div className="text-[22px] font-semibold leading-tight">$4 off</div>
                   <p className="mt-1.5 text-[14px] leading-snug text-[#5a5a5a]">
                     Valid for current order while supplies last
                   </p>

@@ -59,7 +59,7 @@ function Checkout() {
         <button aria-label="Back" className="flex h-8 w-8 items-center justify-center">
           <ArrowLeft className="h-6 w-6" strokeWidth={2.5} />
         </button>
-        <h1 className="flex-1 text-center text-[17px] font-bold">Checkout</h1>
+        <h1 className="flex-1 text-center text-[17px] font-semibold">Checkout</h1>
         <div className="h-8 w-8" />
       </header>
 
@@ -90,7 +90,7 @@ function Checkout() {
           chevron
           className="pt-3"
         >
-          <div className="text-[16px] font-bold leading-tight">
+          <div className="text-[16px] font-semibold leading-tight">
             7428 Willow Creek Dr
           </div>
           <div className="text-[14px] font-medium text-[#6b6b6b]">
@@ -101,7 +101,7 @@ function Checkout() {
 
         {/* Meet at door */}
         <Row icon={<img src={userIconImg} alt="" className="h-6 w-6 object-contain" />} chevron>
-          <div className="text-[16px] font-bold leading-tight">Meet at my door</div>
+          <div className="text-[16px] font-semibold leading-tight">Meet at my door</div>
           <div className="text-[14px] font-medium text-[#0b8a3d]">
             Add delivery instructions &amp; photos
           </div>
@@ -117,7 +117,7 @@ function Checkout() {
           }
           chevron
         >
-          <div className="text-[16px] font-bold tracking-wide">+*** *** *** ****</div>
+          <div className="text-[16px] font-semibold tracking-wide">+*** *** *** ****</div>
         </Row>
         <Divider />
 
@@ -125,9 +125,9 @@ function Checkout() {
         <div className="flex items-center justify-between py-3">
           <div className="flex items-center gap-4">
             <Clock className="h-6 w-6" strokeWidth={2} />
-            <span className="text-[16px] font-bold">Delivery time</span>
+            <span className="text-[16px] font-semibold">Delivery time</span>
           </div>
-          <span className="text-[16px] font-bold text-[#4a4a4a]">3:20–3:42 PM</span>
+          <span className="text-[16px] font-semibold text-[#4a4a4a]">3:20–3:42 PM</span>
         </div>
 
         {/* Delivery options */}
@@ -143,7 +143,7 @@ function Checkout() {
             }
           >
             <div className="text-[13px] font-medium text-[#6b6b6b]">3:17–3:35 PM</div>
-            <div className="mt-0.5 text-[13px] font-bold text-[#0b8a3d]">Direct to you</div>
+            <div className="mt-0.5 text-[13px] font-semibold text-[#0b8a3d]">Direct to you</div>
             <div className="text-[13px] font-medium text-[#6b6b6b]">+$4.99</div>
           </OptionCard>
 
@@ -170,12 +170,12 @@ function Checkout() {
 
       {/* Order summary */}
       <div className="px-4 pt-4">
-        <h2 className="text-[21px] font-extrabold">Order summary</h2>
+        <h2 className="text-[21px] font-semibold">Order summary</h2>
 
         <button className="mt-3 flex w-full items-center gap-3">
           <img src={storeImg} alt="Dunkin'" className="h-10 w-10 rounded-full object-cover" />
           <div className="flex-1 text-left">
-            <div className="text-[16px] font-bold leading-tight">Dunkin'</div>
+            <div className="text-[16px] font-semibold leading-tight">Dunkin'</div>
             <div className="text-[14px] font-medium text-[#6b6b6b]">20 items</div>
           </div>
           <ChevronDown className="h-5 w-5 text-[#6b6b6b]" strokeWidth={2.5} />
@@ -190,7 +190,7 @@ function Checkout() {
         >
           <img src={couponImg} alt="" className="mt-0.5 h-6 w-6 shrink-0 object-contain" />
           <div className="flex-1 min-w-0">
-            <div className="text-[16px] font-bold leading-snug">
+            <div className="text-[16px] font-semibold leading-snug">
               {codeApplied
                 ? "2 promotions applied"
                 : "1 promotion applied, 1 promotion available"}
@@ -209,10 +209,10 @@ function Checkout() {
       {/* Uber One benefits banner */}
       <div className="mx-4 mt-5 flex items-stretch justify-between overflow-hidden rounded-2xl bg-[#f6efdd]">
         <div className="flex flex-col justify-center px-4 py-4">
-          <div className="text-[18px] font-extrabold leading-tight">
+          <div className="text-[18px] font-semibold leading-tight">
             7 days left of your Uber One benefits
           </div>
-          <button className="mt-3 flex w-fit items-center gap-2 rounded-lg bg-white px-3 py-1.5 text-[13px] font-bold">
+          <button className="mt-3 flex w-fit items-center gap-2 rounded-lg bg-white px-3 py-1.5 text-[13px] font-semibold">
             Join free for 1 month <ChevronRight className="h-4 w-4" strokeWidth={2.5} />
           </button>
         </div>
@@ -224,27 +224,27 @@ function Checkout() {
         <PriceRow label="Subtotal" value={money(subtotal)} bold />
         {codeApplied && (
           <div className="flex items-center justify-between py-2">
-            <span className="text-[16px] font-bold">Promotion</span>
-            <span className="rounded-md bg-[#e01a2b] px-2 py-0.5 text-[15px] font-bold text-white">
+            <span className="text-[16px] font-semibold">Promotion</span>
+            <span className="rounded-md bg-[#e01a2b] px-2 py-0.5 text-[15px] font-semibold text-white">
               -{money(codeDiscount)}
             </span>
           </div>
         )}
         <div className="flex items-center justify-between py-2">
-          <span className="flex items-center gap-2 text-[16px] font-bold">
+          <span className="flex items-center gap-2 text-[16px] font-semibold">
             Delivery Fee <Info className="h-4 w-4 text-[#9a9a9a]" strokeWidth={2} />
           </span>
-          <span className="flex items-center gap-1.5 text-[16px] font-bold">
+          <span className="flex items-center gap-1.5 text-[16px] font-semibold">
             <span className="text-[#9a9a9a] line-through">US$7.49</span>
             <UberOneMark img={uberOneImg} />
             <span className="text-[#8a5a12]">US$0.00</span>
           </span>
         </div>
         <div className="flex items-center justify-between py-2">
-          <span className="flex items-center gap-2 text-[16px] font-bold">
+          <span className="flex items-center gap-2 text-[16px] font-semibold">
             Other Fees <Info className="h-4 w-4 text-[#9a9a9a]" strokeWidth={2} />
           </span>
-          <span className="flex items-center gap-1.5 text-[16px] font-bold">
+          <span className="flex items-center gap-1.5 text-[16px] font-semibold">
             <span className="text-[#9a9a9a] line-through">US$14.99</span>
             <UberOneMark img={uberOneImg} />
             <span className="text-[#8a5a12]">US$5.18</span>
@@ -252,8 +252,8 @@ function Checkout() {
         </div>
         <PriceRow label="Taxes" value={money(taxes)} bold />
         <div className="flex items-center justify-between py-2">
-          <span className="text-[19px] font-extrabold">Total</span>
-          <span className="flex items-center gap-1.5 text-[19px] font-extrabold">
+          <span className="text-[19px] font-semibold">Total</span>
+          <span className="flex items-center gap-1.5 text-[19px] font-semibold">
             <span className="text-[#9a9a9a] line-through">US${originalTotal.toFixed(2)}</span>
             <UberOneMark img={uberOneImg} />
             <span className="text-[#8a5a12]">{money(total)}</span>
@@ -266,7 +266,7 @@ function Checkout() {
         {/* Payment */}
         <button className="mt-4 flex w-full items-center gap-3 py-1">
           <img src={applePayImg} alt="Apple Pay" className="h-7 w-11 object-contain" />
-          <span className="flex-1 text-left text-[16px] font-bold">Apple Pay</span>
+          <span className="flex-1 text-left text-[16px] font-semibold">Apple Pay</span>
           <ChevronRight className="h-5 w-5 text-[#9a9a9a]" strokeWidth={2.5} />
         </button>
       </div>
@@ -275,12 +275,12 @@ function Checkout() {
       <div className="fixed inset-x-0 bottom-0 z-20 mx-auto w-full max-w-[480px] bg-background">
         <div className="flex items-center gap-2 bg-[#9a6a12] px-4 py-2.5">
           <img src={footerMarkImg} alt="" className="h-5 w-5 shrink-0 object-contain" />
-          <span className="text-[14px] font-bold text-white">
+          <span className="text-[14px] font-semibold text-white">
             Saving ${(codeDiscount + 18.73).toFixed(2)} with {savingsLabel}
           </span>
         </div>
         <div className="px-4 pb-5 pt-2.5">
-          <button className="w-full rounded-xl bg-black py-3.5 text-[16px] font-bold text-white active:opacity-90">
+          <button className="w-full rounded-xl bg-black py-3.5 text-[16px] font-semibold text-white active:opacity-90">
             Next
           </button>
         </div>
@@ -350,7 +350,7 @@ function OptionCard({
         selected ? "border-2 border-black" : "border border-[#e6e6e6]"
       }`}
     >
-      <div className="text-[17px] font-bold">{title}</div>
+      <div className="text-[17px] font-semibold">{title}</div>
       <div className="mt-1.5">{children}</div>
     </button>
   );
@@ -367,8 +367,8 @@ function PriceRow({
 }) {
   return (
     <div className="flex items-center justify-between py-2">
-      <span className={`text-[16px] ${bold ? "font-bold" : "font-medium"}`}>{label}</span>
-      <span className={`text-[16px] ${bold ? "font-bold" : "font-medium"}`}>{value}</span>
+      <span className={`text-[16px] ${bold ? "font-semibold" : "font-medium"}`}>{label}</span>
+      <span className={`text-[16px] ${bold ? "font-semibold" : "font-medium"}`}>{value}</span>
     </div>
   );
 }
@@ -379,7 +379,7 @@ function UberOneMark({ light, img }: { light?: boolean; img?: string }) {
   }
   return (
     <span
-      className={`inline-flex h-5 w-5 items-center justify-center rounded-full border-2 text-[11px] font-black leading-none ${
+      className={`inline-flex h-5 w-5 items-center justify-center rounded-full border-2 text-[11px] font-semibold leading-none ${
         light ? "border-white text-white" : "border-[#8a5a12] text-[#8a5a12]"
       }`}
     >
