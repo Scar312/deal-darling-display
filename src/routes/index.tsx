@@ -260,7 +260,7 @@ function Checkout() {
 
         {/* Payment */}
         <button className="mt-4 flex w-full items-center gap-3 py-1">
-          <img src={applePayImg} alt="Apple Pay" className="h-7 w-11 object-contain" />
+          <img src={applePayImg} alt="Apple Pay" className="h-7 w-11 rounded-md object-contain shadow-[0_2px_8px_rgba(0,0,0,0.18)] ring-1 ring-black/5" />
           <span className="flex-1 text-left text-[16px] font-semibold">Apple Pay</span>
           <ChevronRight className="h-5 w-5 text-[#9a9a9a]" strokeWidth={2.5} />
         </button>
