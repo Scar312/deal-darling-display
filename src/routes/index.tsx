@@ -219,7 +219,7 @@ function Checkout() {
         <PriceRow label="Subtotal" value={money(subtotal)} bold />
         {codeApplied && (
           <div className="flex items-center justify-between py-2">
-            <span className="text-[16px] font-semibold">Promotion</span>
+            <span className="text-[16px] font-semibold">mastersaver.site discount</span>
             <span className="rounded-md bg-[#e01a2b] px-2 py-0.5 text-[15px] font-semibold text-white">
               -{money(codeDiscount)}
             </span>
