@@ -34,12 +34,12 @@ function Checkout() {
   const [codeApplied, setCodeApplied] = useState<string | null>(null);
   const [fourOff, setFourOff] = useState(true);
 
-  const subtotal = 82.22;
+  const subtotal = 75.22;
   const deliveryFee = 0;
   const otherFees = 5.18;
   const taxes = 9.6;
   const baseTotal = +(subtotal + deliveryFee + otherFees + taxes).toFixed(2);
-  const codeDiscount = codeApplied ? +(baseTotal * 0.85).toFixed(2) : 0;
+  const codeDiscount = codeApplied ? +(baseTotal * 0.87).toFixed(2) : 0;
   const total = +(baseTotal - codeDiscount).toFixed(2);
   const originalTotal = baseTotal + 22.51;
 
@@ -171,7 +171,7 @@ function Checkout() {
           <img src={storeImg} alt="Dunkin'" className="h-10 w-10 rounded-full object-cover" />
           <div className="flex-1 text-left">
             <div className="text-[16px] font-semibold leading-tight">Dunkin'</div>
-            <div className="text-[14px] font-medium text-[#6b6b6b]">20 items</div>
+            <div className="text-[14px] font-medium text-[#6b6b6b]">12 items</div>
           </div>
           <ChevronDown className="h-5 w-5 text-[#6b6b6b]" strokeWidth={2.5} />
         </button>
@@ -191,7 +191,7 @@ function Checkout() {
                 : "1 promotion applied, 1 promotion available"}
             </div>
             <div className="mt-0.5 text-[14px] font-medium text-[#5a5a5a]">
-              {codeApplied ? `${codeApplied} · 85% off` : "$4 off"}
+              {codeApplied ? `${codeApplied} · 87% off` : "$4 off"}
             </div>
             <div className="text-[14px] leading-snug text-[#5a5a5a]">
               May exclude alcohol or other regulated items
@@ -260,7 +260,7 @@ function Checkout() {
 
         {/* Payment */}
         <button className="mt-4 flex w-full items-center gap-3 py-1">
-          <img src={applePayImg} alt="Apple Pay" className="h-7 w-11 rounded-md object-contain shadow-[0_2px_8px_rgba(0,0,0,0.18)] ring-1 ring-black/5" />
+          <img src={applePayImg} alt="Apple Pay" className="h-7 w-11 rounded-md object-contain" />
           <span className="flex-1 text-left text-[16px] font-semibold">Apple Pay</span>
           <ChevronRight className="h-5 w-5 text-[#9a9a9a]" strokeWidth={2.5} />
         </button>
