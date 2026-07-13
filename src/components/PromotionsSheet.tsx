@@ -89,9 +89,13 @@ export function PromotionsSheet({
             <input
               autoFocus
               value={code}
-              onChange={(e) => setCode(e.target.value)}
+              onChange={(e) => setCode(e.target.value.toUpperCase())}
               placeholder="Enter promo code"
-              className="flex-1 bg-transparent text-[16px] font-medium text-foreground placeholder:text-[#6b6b6b] focus:outline-none"
+              autoCapitalize="characters"
+              autoCorrect="off"
+              spellCheck={false}
+              style={{ textTransform: "uppercase" }}
+              className="flex-1 bg-transparent text-[16px] font-medium uppercase text-foreground placeholder:normal-case placeholder:text-[#6b6b6b] focus:outline-none"
             />
           </div>
           {/* Add promo pinned at the bottom; stays above the keyboard */}
@@ -120,7 +124,7 @@ export function PromotionsSheet({
               <div>
                 <div className="text-[15px] font-semibold">Promo code applied</div>
                 <div className="text-[13px] text-[#5a5a5a]">
-                  Code: {codeApplied} · 85% off
+                  Code: {codeApplied} · 87% off
                 </div>
               </div>
               <button
