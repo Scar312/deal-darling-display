@@ -168,12 +168,26 @@ function Checkout() {
         <h2 className="text-[21px] font-semibold">Order summary</h2>
 
         <button className="mt-3 flex w-full items-center gap-3">
-          <img src={storeImg} alt="Dunkin'" className="h-10 w-10 rounded-full object-cover" />
+          <img src={storeImg} alt="McDonald's" className="h-10 w-10 rounded-full object-cover" />
           <div className="flex-1 text-left">
-            <div className="text-[16px] font-semibold leading-tight">Dunkin'</div>
+            <div className="text-[16px] font-semibold leading-tight">McDonald's®</div>
             <div className="text-[14px] font-medium text-[#6b6b6b]">12 items</div>
           </div>
           <ChevronDown className="h-5 w-5 text-[#6b6b6b]" strokeWidth={2.5} />
+        </button>
+
+        <div className="mt-3 h-px bg-[#eee]" />
+
+        {/* Send as a gift */}
+        <button className="mt-3 flex w-full items-center gap-3 text-left">
+          <span className="text-[26px] leading-none">🎁</span>
+          <div className="flex-1 min-w-0">
+            <div className="text-[16px] font-semibold leading-tight">Send as a gift</div>
+            <div className="text-[14px] font-medium text-[#6b6b6b]">
+              And customize a digital card
+            </div>
+          </div>
+          <ChevronRight className="h-5 w-5 shrink-0 text-[#9a9a9a]" strokeWidth={2.5} />
         </button>
 
         <div className="mt-3 h-px bg-[#eee]" />
