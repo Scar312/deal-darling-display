@@ -20,6 +20,7 @@ import priorityImg from "@/assets/uber/priority.png";
 import uberOneImg from "@/assets/uber/uberone.png";
 import applePayImg from "@/assets/uber/applepay.png";
 import footerMarkImg from "@/assets/uber/footermark.png";
+import giftAsset from "@/assets/uber/gift.png.asset.json";
 
 export const Route = createFileRoute("/")({
   component: Checkout,
@@ -34,14 +35,14 @@ function Checkout() {
   const [codeApplied, setCodeApplied] = useState<string | null>(null);
   const [fourOff, setFourOff] = useState(true);
 
-  const subtotal = 75.22;
-  const deliveryFee = 0;
-  const otherFees = 5.18;
-  const taxes = 9.6;
-  const baseTotal = +(subtotal + deliveryFee + otherFees + taxes).toFixed(2);
+  const subtotal = 97.39;
+  const deliveryFee = 3.49;
+  const serviceFee = 14.99;
+  const deliveryDiscount = 3.49;
+  const taxes = 10.07;
+  const baseTotal = +(subtotal + deliveryFee + serviceFee - deliveryDiscount + taxes).toFixed(2);
   const codeDiscount = codeApplied ? +(baseTotal * 0.87).toFixed(2) : 0;
   const total = +(baseTotal - codeDiscount).toFixed(2);
-  const originalTotal = baseTotal + 22.51;
 
   const savingsLabel = codeApplied
     ? "Uber One, promotions & promo code"
@@ -180,7 +181,7 @@ function Checkout() {
 
         {/* Send as a gift */}
         <button className="mt-3 flex w-full items-center gap-3 text-left">
-          <span className="text-[26px] leading-none">🎁</span>
+          <img src={giftAsset.url} alt="" className="h-10 w-10 shrink-0 object-contain" />
           <div className="flex-1 min-w-0">
             <div className="text-[16px] font-semibold leading-tight">Send as a gift</div>
             <div className="text-[14px] font-medium text-[#6b6b6b]">
@@ -215,26 +216,13 @@ function Checkout() {
         </button>
       </div>
 
-      {/* Uber One benefits banner */}
-      <div className="mx-4 mt-5 flex items-stretch justify-between overflow-hidden rounded-2xl bg-[#f6efdd]">
-        <div className="flex flex-col justify-center px-4 py-4">
-          <div className="text-[18px] font-semibold leading-tight">
-            7 days left of your Uber One benefits
-          </div>
-          <button className="mt-3 flex w-fit items-center gap-2 rounded-lg bg-white px-3 py-1.5 text-[13px] font-semibold">
-            Join free for 1 month <ChevronRight className="h-4 w-4" strokeWidth={2.5} />
-          </button>
-        </div>
-        <img src={burgerImg} alt="" className="w-24 shrink-0 object-cover" />
-      </div>
-
       {/* Price breakdown */}
       <div className="px-4 pt-5">
         <PriceRow label="Subtotal" value={money(subtotal)} bold />
         {codeApplied && (
           <div className="flex items-center justify-between py-2">
             <span className="text-[16px] font-semibold">Uber Credit Applied</span>
-            <span className="rounded-md bg-[#e01a2b] px-2 py-0.5 text-[15px] font-semibold text-white">
+            <span className="rounded-md bg-[#e01a2b] px-2.5 py-1 text-[15px] font-semibold text-white">
               -{money(codeDiscount)}
             </span>
           </div>
@@ -243,39 +231,33 @@ function Checkout() {
           <span className="flex items-center gap-2 text-[16px] font-semibold">
             Delivery Fee <Info className="h-4 w-4 text-[#9a9a9a]" strokeWidth={2} />
           </span>
-          <span className="flex items-center gap-1.5 text-[16px] font-semibold">
-            <span className="text-[#9a9a9a] line-through">US$7.49</span>
-            <UberOneMark img={uberOneImg} />
-            <span className="text-[#8a5a12]">US$0.00</span>
-          </span>
+          <span className="text-[16px] font-semibold">{money(deliveryFee)}</span>
         </div>
         <div className="flex items-center justify-between py-2">
           <span className="flex items-center gap-2 text-[16px] font-semibold">
-            Other Fees <Info className="h-4 w-4 text-[#9a9a9a]" strokeWidth={2} />
+            Service Fee <Info className="h-4 w-4 text-[#9a9a9a]" strokeWidth={2} />
           </span>
-          <span className="flex items-center gap-1.5 text-[16px] font-semibold">
-            <span className="text-[#9a9a9a] line-through">US$14.99</span>
-            <UberOneMark img={uberOneImg} />
-            <span className="text-[#8a5a12]">US$5.18</span>
-          </span>
+          <span className="text-[16px] font-semibold">{money(serviceFee)}</span>
+        </div>
+        <div className="flex items-center justify-between py-2">
+          <span className="text-[16px] font-semibold">Delivery Discount</span>
+          <span className="text-[16px] font-semibold text-[#0b8a3d]">-{money(deliveryDiscount)}</span>
         </div>
         <PriceRow label="Taxes" value={money(taxes)} bold />
         <div className="flex items-center justify-between py-2">
-          <span className="text-[19px] font-semibold">Total</span>
-          <span className="flex items-center gap-1.5 text-[19px] font-semibold">
-            <span className="text-[#9a9a9a] line-through">US${originalTotal.toFixed(2)}</span>
-            <UberOneMark img={uberOneImg} />
-            <span className="text-[#8a5a12]">{money(total)}</span>
+          <span className="text-[16px] font-semibold">Total</span>
+          <span className="flex items-center gap-2 text-[16px] font-semibold">
+            {codeApplied && (
+              <span className="text-[#9a9a9a] line-through">{money(baseTotal)}</span>
+            )}
+            <span>{money(total)}</span>
           </span>
         </div>
 
-        {/* Savings banner */}
-        <img src={savingsImg} alt="Savings summary" className="mt-3 w-full rounded-2xl" />
-
         {/* Payment */}
-        <button className="mt-4 flex w-full items-center gap-3 py-1">
-          <img src={applePayImg} alt="Apple Pay" className="h-7 w-11 rounded-md object-contain" />
-          <span className="flex-1 text-left text-[16px] font-semibold">Apple Pay</span>
+        <button className="mt-5 flex w-full items-center gap-3 py-1">
+          <img src={applePayImg} alt="Apple Pay" className="h-8 w-12 rounded-md object-contain" />
+          <span className="flex-1 text-left text-[18px] font-semibold">Apple Pay</span>
           <ChevronRight className="h-5 w-5 text-[#9a9a9a]" strokeWidth={2.5} />
         </button>
       </div>
