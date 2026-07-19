@@ -10,14 +10,11 @@ import {
 } from "lucide-react";
 import { PromotionsSheet } from "@/components/PromotionsSheet";
 import mapImg from "@/assets/uber/map.jpg";
-import savingsImg from "@/assets/uber/savings.jpg";
-import burgerImg from "@/assets/uber/burger.jpg";
 import storeImg from "@/assets/uber/store.png";
 import locationImg from "@/assets/uber/location.png";
 import userIconImg from "@/assets/uber/user.png";
 import couponImg from "@/assets/uber/coupon.png";
 import priorityImg from "@/assets/uber/priority.png";
-import uberOneImg from "@/assets/uber/uberone.png";
 import applePayImg from "@/assets/uber/applepay.png";
 import footerMarkImg from "@/assets/uber/footermark.png";
 import giftAsset from "@/assets/uber/gift.png.asset.json";
