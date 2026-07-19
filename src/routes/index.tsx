@@ -169,7 +169,7 @@ function Checkout() {
           <img src={storeImg} alt="McDonald's" className="h-10 w-10 rounded-full object-cover" />
           <div className="flex-1 text-left">
             <div className="text-[16px] font-semibold leading-tight">McDonald's®</div>
-            <div className="text-[14px] font-medium text-[#6b6b6b]">12 items</div>
+            <div className="text-[14px] font-medium text-[#6b6b6b]">5 items</div>
           </div>
           <ChevronDown className="h-5 w-5 text-[#6b6b6b]" strokeWidth={2.5} />
         </button>
@@ -198,15 +198,12 @@ function Checkout() {
           <img src={couponImg} alt="" className="mt-0.5 h-6 w-6 shrink-0 object-contain" />
           <div className="flex-1 min-w-0">
             <div className="text-[16px] font-semibold leading-snug">
+              {codeApplied ? "2 promotions applied" : "1 promotion applied"}
+            </div>
+            <div className="mt-0.5 text-[14px] font-medium leading-snug text-[#5a5a5a]">
               {codeApplied
-                ? "2 promotions applied"
-                : "1 promotion applied, 1 promotion available"}
-            </div>
-            <div className="mt-0.5 text-[14px] font-medium text-[#5a5a5a]">
-              {codeApplied ? `${codeApplied} · 87% off` : "$4 off"}
-            </div>
-            <div className="text-[14px] leading-snug text-[#5a5a5a]">
-              May exclude alcohol or other regulated items
+                ? `You're saving $5, Discounted Delivery on us, conditions apply`
+                : "Discounted Delivery on us, conditions apply"}
             </div>
           </div>
           <ChevronRight className="mt-0.5 h-5 w-5 shrink-0 text-[#9a9a9a]" strokeWidth={2.5} />
@@ -218,7 +215,7 @@ function Checkout() {
         <PriceRow label="Subtotal" value={money(subtotal)} bold />
         {codeApplied && (
           <div className="flex items-center justify-between py-2">
-            <span className="text-[16px] font-semibold">Uber Credit Applied</span>
+            <span className="text-[16px] font-semibold text-[#e01a2b]">Uber Credit Applied</span>
             <span className="rounded-md bg-[#e01a2b] px-2.5 py-1 text-[15px] font-semibold text-white">
               -{money(codeDiscount)}
             </span>
@@ -257,12 +254,30 @@ function Checkout() {
           <span className="flex-1 text-left text-[18px] font-semibold">Apple Pay</span>
           <ChevronRight className="h-5 w-5 text-[#9a9a9a]" strokeWidth={2.5} />
         </button>
+
+        {/* Email opt-in */}
+        <label className="mt-5 flex cursor-pointer items-center gap-3 rounded-md bg-[#f2f2f2] px-4 py-3.5">
+          <span className="flex-1 text-[15px] font-semibold leading-snug">
+            Sign up to receive email offers and news from McDonald's
+          </span>
+          <input
+            type="checkbox"
+            className="h-5 w-5 shrink-0 appearance-none rounded-[4px] border-2 border-[#111] bg-white checked:bg-[#111]"
+          />
+        </label>
+
+        {/* Privacy notice */}
+        <p className="mt-4 text-[13px] leading-snug text-[#6b6b6b]">
+          <span className="font-semibold text-[#3a3a3a]">Privacy Notice:</span> By checking the box, you agree to McDonald's Terms &amp; Conditions and that Uber may share your name, email, and order information and history with McDonald's. McDonald's will use that information to send you promotional emails and personalize your McDonald's experience in accordance with McDonald's Privacy Statement. You can stop sharing in your app settings and find an unsubscribe link in each email from McDonald's.{" "}
+          <a className="font-semibold text-[#0b8a3d]" href="#">View Terms &amp; Conditions</a>.{" "}
+          <a className="font-semibold text-[#0b8a3d]" href="#">View Privacy Statement</a>.
+        </p>
       </div>
 
       {/* Bottom sticky */}
       <div className="fixed inset-x-0 bottom-0 z-20 mx-auto w-full max-w-[480px] bg-background">
-        <div className="flex items-center gap-2 bg-[#9a6a12] px-4 py-2.5">
-          <img src={footerMarkImg} alt="" className="h-5 w-5 shrink-0 object-contain" />
+        <div className="flex items-center gap-2 bg-[#e01a2b] px-4 py-2.5">
+          <img src={footerMarkImg} alt="" className="h-5 w-5 shrink-0 object-contain brightness-0 invert" />
           <span className="text-[14px] font-semibold text-white">
             Saving ${(codeDiscount + 18.73).toFixed(2)} with {savingsLabel}
           </span>
