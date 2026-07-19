@@ -156,7 +156,7 @@ export function PromotionsSheet({
                     Valid for current order while supplies last
                   </p>
                   <p className="mt-1 text-[14px] leading-snug text-[#5a5a5a]">
-                    Use at Dunkin' · Unlimited until Sep 3…
+                    Use at McDonald's · Unlimited until Sep 3…
                   </p>
                 </div>
                 <img src={saladImg} alt="" className="h-14 w-14 object-contain" />
@@ -187,7 +187,7 @@ export function PromotionsSheet({
                     Valid for current order while supplies last
                   </p>
                   <p className="mt-1 text-[14px] leading-snug text-[#5a5a5a]">
-                    Use at Dunkin' · $16 minimum order (…
+                    Use at McDonald's · $16 minimum order (…
                   </p>
                 </div>
                 <img src={saladImg} alt="" className="h-14 w-14 object-contain" />
