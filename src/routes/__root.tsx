@@ -86,8 +86,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Checkout" },
       { name: "twitter:description", content: "Review your delivery details and complete your order at checkout." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/4827590c-0265-465f-af84-5f30aab1b985/id-preview-9e5f7f6e--d6acb6b9-fe72-4655-9de1-a1276f918728.lovable.app-1783829029339.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/4827590c-0265-465f-af84-5f30aab1b985/id-preview-9e5f7f6e--d6acb6b9-fe72-4655-9de1-a1276f918728.lovable.app-1783829029339.png" },
     ],
     links: [
       {
@@ -98,7 +96,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
         rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800&family=Rubik:wght@400;500;600;700;800&display=swap",
+        href: "https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap",
       },
       { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
     ],

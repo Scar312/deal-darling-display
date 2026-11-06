@@ -8,3 +8,5 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- Keep checkout fee constants and total/promo calculations in `src/lib/checkout-pricing.ts` so the checkout display and pricing tests share one source of truth.
