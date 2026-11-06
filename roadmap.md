@@ -1,0 +1,3 @@
+- [ ] Match the checkout delivery, order summary, fee breakdown, and savings bar to the uploaded references.
+- [ ] Rebuild the promotions sheet to match its references while retaining promo entry and selection interactions.
+- [ ] Verify displayed totals, promo calculations, and the mobile preview.
