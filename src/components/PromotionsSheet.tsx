@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
-import { X, ArrowLeft } from "lucide-react";
-import saladImg from "@/assets/uber/bogo.png";
+import { ArrowLeft, ChevronRight, X } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import burgerImg from "@/assets/uber/burger.jpg";
+import saladImg from "@/assets/uber/salad.png";
+import savingsImg from "@/assets/uber/savings.jpg";
 
 interface PromotionsSheetProps {
   open: boolean;
@@ -62,151 +65,157 @@ export function PromotionsSheet({
   return (
     <div
       style={viewportHeight ? { height: viewportHeight } : undefined}
-      className={`fixed inset-x-0 top-0 z-50 mx-auto flex h-[100dvh] w-full max-w-[480px] flex-col bg-white transition-transform duration-300 ease-out ${
+      aria-hidden={!open}
+      className={`fixed inset-x-0 top-0 z-50 mx-auto flex h-[100dvh] w-full max-w-[480px] flex-col bg-background text-foreground transition-transform duration-300 ease-out ${
         open ? "translate-y-0" : "pointer-events-none translate-y-full"
       }`}
     >
-      {/* Header */}
-      <div className="relative flex items-center justify-center px-4 pb-3 pt-4">
-        {promoMode ? null : (
-          <button
-            onClick={closeAll}
-            aria-label="Close"
-            className="absolute left-3 top-3.5 flex h-9 w-9 items-center justify-center"
-          >
-            <X className="h-6 w-6" strokeWidth={2.5} />
-          </button>
-        )}
-        <h2 className="text-[17px] font-semibold">Promotions</h2>
+      <div className="relative flex h-[72px] shrink-0 items-center justify-center px-4">
+        <Button
+          variant="ghost"
+          size="icon"
+          tabIndex={open ? 0 : -1}
+          onClick={promoMode ? () => setPromoMode(false) : closeAll}
+          aria-label={promoMode ? "Back" : "Close"}
+          className="absolute left-4 h-10 w-10"
+        >
+          {promoMode ? <ArrowLeft className="h-6 w-6" /> : (
+            <X className="h-6 w-6" strokeWidth={1.8} />
+          )}
+        </Button>
+        <h2 className="text-[19px] font-semibold">Promotions</h2>
       </div>
 
       {promoMode ? (
-        <div className="flex min-h-0 flex-1 flex-col px-4 pt-1">
-          <div className="flex items-center gap-3 rounded-full bg-[#f3f3f3] px-4 py-3">
-            <button onClick={() => setPromoMode(false)} aria-label="Back">
-              <ArrowLeft className="h-5 w-5" strokeWidth={2.5} />
-            </button>
+        <div className="flex min-h-0 flex-1 flex-col px-4 pb-[env(safe-area-inset-bottom)] pt-1">
+          <label className="flex shrink-0 items-center gap-3 rounded-full bg-checkout-surface px-5 py-4">
+            <img src={couponImg} alt="" className="h-7 w-7 object-contain" />
             <input
               autoFocus
               value={code}
-              onChange={(e) => setCode(e.target.value.toUpperCase())}
+              onChange={(event) => setCode(event.target.value.toUpperCase())}
               placeholder="Enter promo code"
+              aria-label="Enter promo code"
               autoCapitalize="characters"
               autoCorrect="off"
               spellCheck={false}
               style={{ textTransform: "uppercase" }}
-              className="flex-1 bg-transparent text-[16px] font-medium uppercase text-foreground placeholder:normal-case placeholder:text-[#6b6b6b] focus:outline-none"
+              className="min-w-0 flex-1 bg-transparent text-[17px] font-medium uppercase text-foreground placeholder:normal-case placeholder:text-checkout-muted focus:outline-none"
             />
-          </div>
-          {/* Add promo pinned at the bottom; stays above the keyboard */}
-          <div className="mt-auto pb-4 pt-3">
-            <button
+          </label>
+          <div className="mt-auto pt-4">
+            <Button
               onClick={handleAdd}
-              className="w-full rounded-xl bg-black py-3.5 text-[16px] font-semibold text-white active:opacity-90"
+              disabled={!code.trim()}
+              className="h-[58px] w-full rounded-xl bg-foreground text-[18px] font-medium text-background hover:bg-foreground/90"
             >
               Add promo
-            </button>
+            </Button>
           </div>
         </div>
       ) : (
-        <div className="flex-1 overflow-y-auto px-4 pb-8">
-          {/* Enter promo pill */}
-          <button
+        <div className="min-h-0 flex-1 overflow-y-auto px-4 pb-8">
+          <Button
+            variant="ghost"
             onClick={() => setPromoMode(true)}
-            className="mt-1 flex w-full items-center gap-3 rounded-full bg-[#f3f3f3] px-4 py-3 text-left"
+            tabIndex={open ? 0 : -1}
+            className="mt-1 flex h-auto w-full justify-start gap-3 rounded-full bg-checkout-surface px-5 py-4 text-left hover:bg-checkout-surface"
           >
-            <img src={couponImg} alt="" className="h-5 w-5 object-contain" />
-            <span className="text-[16px] font-medium text-[#6b6b6b]">Enter promo code</span>
-          </button>
+            <img src={couponImg} alt="" className="h-7 w-7 object-contain" />
+            <span className="text-[17px] font-semibold text-checkout-muted">Enter promo code</span>
+          </Button>
 
           {codeApplied && (
-            <div className="mt-4 flex items-center justify-between rounded-xl border border-[#111] bg-white px-4 py-3">
+            <div className="mt-4 flex items-center justify-between gap-3 border-y border-checkout-separator py-4">
               <div>
-                <div className="text-[15px] font-semibold">Promo code applied</div>
-                <div className="text-[13px] text-[#5a5a5a]">
-                  Code: {codeApplied} · 87% off
-                </div>
+                <div className="text-[16px] font-medium text-checkout-red">Promo code applied</div>
+                <div className="mt-1 text-[14px] text-checkout-muted">Code: {codeApplied} · 87% off</div>
               </div>
-              <button
+              <Button
+                variant="link"
+                tabIndex={open ? 0 : -1}
                 onClick={onRemoveCode}
-                aria-label="remove promo"
-                className="text-[14px] font-semibold underline"
+                className="px-2 text-[14px] font-medium text-checkout-red"
               >
                 Remove
-              </button>
+              </Button>
             </div>
           )}
 
-          {/* Stackable */}
-          <div className="mt-6">
-            <h3 className="text-[19px] font-semibold leading-tight">
-              Promotions you can stack
-            </h3>
-            <p className="mt-0.5 text-[14px] font-semibold text-[#3a3a3a]">
-              Use with other promotions
-            </p>
+          <section className="mt-7">
+            <h3 className="text-[21px] font-semibold leading-tight">Promotions you can stack</h3>
+            <p className="mt-1 text-[15px] font-medium">Use with other promotions</p>
+            <PromotionCard title="Free Item on $15+" image={saladImg} selected={false}>
+              <p>Valid for current order while supplies last</p>
+              <p>Get 1 of this item for free with this order when you spend at least $15 (excluding…</p>
+            </PromotionCard>
+          </section>
 
-            <div className="mt-3 rounded-2xl border border-[#e6e6e6] bg-[#fafafa] p-4">
-              <div className="flex items-start justify-between gap-3">
-                <div className="flex-1">
-                  <div className="text-[22px] font-semibold leading-tight">
-                    Buy 1, get 1 free
-                  </div>
-                  <p className="mt-1.5 text-[14px] leading-snug text-[#5a5a5a]">
-                    Valid for current order while supplies last
-                  </p>
-                  <p className="mt-1 text-[14px] leading-snug text-[#5a5a5a]">
-                    Use at McDonald's · Unlimited until Sep 3…
-                  </p>
-                </div>
-                <img src={saladImg} alt="" className="h-14 w-14 object-contain" />
-              </div>
-              <div className="mt-4 flex items-center gap-5">
-                <button className="rounded-full bg-[#e8e8e8] px-5 py-2 text-[14px] font-semibold">
-                  Shop
-                </button>
-                <button className="text-[14px] font-semibold">Details</button>
-              </div>
+          <section className="mt-7">
+            <h3 className="text-[21px] font-semibold leading-tight">One-per-order promotions</h3>
+            <p className="mt-1 text-[15px] font-medium">Limit of one per order</p>
+            <PromotionCard title="Discounted Delivery Fee on us" image={null} selected>
+              <p>Use by Dec 3, 2026 9 PM</p>
+              <p>For 3 delivery orders · Only redeemable on delivery orders · Restaurant orders…</p>
+            </PromotionCard>
+            <PromotionCard title="Discounted Service Fee on us" image={null} selected={fourOffSelected}>
+              <p>Use by Dec 3, 2026 9 PM</p>
+              <p>For 3 delivery orders · Only redeemable on delivery orders · Restaurant orders…</p>
+            </PromotionCard>
+          </section>
+
+          <div className="relative mt-7 overflow-hidden rounded-[22px] bg-checkout-surface">
+            <img src={burgerImg} alt="Burger" className="absolute inset-y-0 right-0 h-full w-[32%] object-cover object-center" />
+            <div className="relative z-10 flex min-h-[132px] max-w-[75%] flex-col justify-between p-4">
+              <p className="text-[17px] font-semibold leading-snug">$0 Delivery Fee + up to 10% off with Uber One</p>
+              <Button variant="secondary" className="h-9 w-fit rounded-full px-4 text-[14px]">Try free for 4 weeks</Button>
             </div>
-          </div>
-
-          {/* One-per-order */}
-          <div className="mt-6">
-            <h3 className="text-[19px] font-semibold leading-tight">
-              One-per-order promotions
-            </h3>
-            <p className="mt-0.5 text-[14px] font-semibold text-[#3a3a3a]">
-              Limit of one per order
-            </p>
-
-            <div className="mt-3 rounded-2xl border-2 border-black bg-white p-4">
-              <div className="flex items-start justify-between gap-3">
-                <div className="flex-1">
-                  <div className="text-[22px] font-semibold leading-tight">$4 off</div>
-                  <p className="mt-1.5 text-[14px] leading-snug text-[#5a5a5a]">
-                    Valid for current order while supplies last
-                  </p>
-                  <p className="mt-1 text-[14px] leading-snug text-[#5a5a5a]">
-                    Use at McDonald's · $16 minimum order (…
-                  </p>
-                </div>
-                <img src={saladImg} alt="" className="h-14 w-14 object-contain" />
-              </div>
-              <div className="mt-4 flex items-center gap-5">
-                <button
-                  onClick={onToggleFourOff}
-                  className={`rounded-full px-5 py-2 text-[14px] font-semibold ${
-                    fourOffSelected ? "bg-black text-white" : "bg-[#e8e8e8] text-black"
-                  }`}
-                >
-                  {fourOffSelected ? "Selected" : "Select"}
-                </button>
-                <button className="text-[14px] font-semibold">Details</button>
-              </div>
-            </div>
+            <img src={savingsImg} alt="" className="sr-only" />
           </div>
         </div>
       )}
     </div>
+  );
+}
+
+function PromotionCard({
+  title,
+  image,
+  selected,
+  children,
+}: {
+  title: string;
+  image: string | null;
+  selected: boolean;
+  children: React.ReactNode;
+}) {
+  const [showDetails, setShowDetails] = useState(false);
+
+  return (
+    <article className={`mt-4 rounded-[16px] border-2 bg-background p-4 ${selected ? "border-foreground" : "border-checkout-separator"}`}>
+      <div className="flex items-start justify-between gap-3">
+        <h4 className="min-w-0 flex-1 text-[23px] font-semibold leading-[1.18]">{title}</h4>
+        {image ? (
+          <img src={image} alt="" className="h-[58px] w-[58px] shrink-0 object-contain" />
+        ) : (
+          <span aria-hidden="true" className="promo-discount-mark flex h-[58px] w-[58px] shrink-0 items-center justify-center text-[33px] font-medium text-white">$</span>
+        )}
+      </div>
+      <div className="mt-3 space-y-0.5 text-[15px] font-medium leading-[1.45] text-checkout-muted">
+        {children}
+        {showDetails && <p>Valid on eligible McDonald&apos;s delivery orders. Conditions apply.</p>}
+      </div>
+      <div className="mt-5 flex items-center gap-5">
+        <Button
+          variant={selected ? "default" : "secondary"}
+          className={`h-10 rounded-full px-5 text-[15px] font-medium ${selected ? "bg-foreground text-background hover:bg-foreground/90" : ""}`}
+        >
+          {selected ? "Selected" : "Shop"}
+        </Button>
+        <Button variant="ghost" onClick={() => setShowDetails((visible) => !visible)} className="h-10 px-2 text-[15px] font-medium">
+          {showDetails ? "Hide details" : "Details"}
+        </Button>
+      </div>
+    </article>
   );
 }
