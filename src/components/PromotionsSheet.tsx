@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
-import { ArrowLeft, ChevronRight, X } from "lucide-react";
+import { ArrowLeft, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import burgerImg from "@/assets/uber/burger.jpg";
 import saladImg from "@/assets/uber/salad.png";
-import savingsImg from "@/assets/uber/savings.jpg";
 
 interface PromotionsSheetProps {
   open: boolean;
@@ -158,7 +157,12 @@ export function PromotionsSheet({
               <p>Use by Dec 3, 2026 9 PM</p>
               <p>For 3 delivery orders · Only redeemable on delivery orders · Restaurant orders…</p>
             </PromotionCard>
-            <PromotionCard title="Discounted Service Fee on us" image={null} selected={fourOffSelected}>
+            <PromotionCard
+              title="Discounted Service Fee on us"
+              image={null}
+              selected={fourOffSelected}
+              onToggle={onToggleFourOff}
+            >
               <p>Use by Dec 3, 2026 9 PM</p>
               <p>For 3 delivery orders · Only redeemable on delivery orders · Restaurant orders…</p>
             </PromotionCard>
@@ -170,7 +174,6 @@ export function PromotionsSheet({
               <p className="text-[17px] font-semibold leading-snug">$0 Delivery Fee + up to 10% off with Uber One</p>
               <Button variant="secondary" className="h-9 w-fit rounded-full px-4 text-[14px]">Try free for 4 weeks</Button>
             </div>
-            <img src={savingsImg} alt="" className="sr-only" />
           </div>
         </div>
       )}
@@ -182,11 +185,13 @@ function PromotionCard({
   title,
   image,
   selected,
+  onToggle,
   children,
 }: {
   title: string;
   image: string | null;
   selected: boolean;
+  onToggle?: () => void;
   children: React.ReactNode;
 }) {
   const [showDetails, setShowDetails] = useState(false);
@@ -208,6 +213,7 @@ function PromotionCard({
       <div className="mt-5 flex items-center gap-5">
         <Button
           variant={selected ? "default" : "secondary"}
+          onClick={onToggle}
           className={`h-10 rounded-full px-5 text-[15px] font-medium ${selected ? "bg-foreground text-background hover:bg-foreground/90" : ""}`}
         >
           {selected ? "Selected" : "Shop"}

@@ -10,7 +10,6 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { PromotionsSheet } from "@/components/PromotionsSheet";
-import applePayImg from "@/assets/uber/applepay.png";
 import couponImg from "@/assets/uber/coupon.png";
 import giftAsset from "@/assets/uber/gift.png.asset.json";
 import locationImg from "@/assets/uber/location.png";
@@ -215,7 +214,6 @@ function Checkout() {
         onToggleFourOff={() => setFourOff((selected) => !selected)}
         couponImg={couponImg}
       />
-      <img src={applePayImg} alt="" className="sr-only" />
     </main>
   );
 }
