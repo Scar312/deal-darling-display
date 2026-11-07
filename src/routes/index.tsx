@@ -43,7 +43,7 @@ function Checkout() {
   const totals = calculateCheckoutTotals(Boolean(codeApplied));
 
   return (
-    <main className="mx-auto min-h-dvh w-full max-w-[480px] bg-background pb-44 text-foreground">
+    <main className="mx-auto min-h-dvh w-full max-w-[480px] bg-background pb-52 text-foreground">
       <header className="sticky top-0 z-30 flex items-center bg-background px-5 pb-2 pt-3">
         <Button variant="ghost" size="icon" aria-label="Back" className="h-9 w-9 shrink-0">
           <ArrowLeft className="h-6 w-6" strokeWidth={2} />
@@ -54,7 +54,7 @@ function Checkout() {
 
       <section className="px-5 pt-2">
         <div className="overflow-hidden rounded-2xl">
-          <img src={mapImg} alt="Map showing your delivery location" className="h-[158px] w-full object-cover" />
+          <img src={mapImg} alt="Map showing your delivery location" className="h-[122px] w-full object-cover" />
         </div>
 
         <CheckoutRow icon={<img src={locationImg} alt="" />}>
@@ -196,7 +196,7 @@ function Checkout() {
 
       <div className="fixed inset-x-0 bottom-0 z-20 mx-auto w-full max-w-[480px] bg-background">
         <div className="checkout-savings flex min-h-[82px] items-center gap-4 px-5 py-3">
-          <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-checkout-red text-[30px] font-medium leading-none text-white">$</span>
+          <span className="promo-discount-mark flex h-12 w-12 shrink-0 items-center justify-center text-[30px] font-medium leading-none text-white">$</span>
           <span className="text-[19px] font-medium">Saving $5.02 <span className="mt-1 block text-[16px] text-checkout-muted">with Offers</span></span>
         </div>
         <div className="bg-background px-5 pb-5 pt-3">

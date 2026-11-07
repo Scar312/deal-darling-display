@@ -65,6 +65,7 @@ export function PromotionsSheet({
     <div
       style={viewportHeight ? { height: viewportHeight } : undefined}
       aria-hidden={!open}
+      inert={!open}
       className={`fixed inset-x-0 top-0 z-50 mx-auto flex h-[100dvh] w-full max-w-[480px] flex-col bg-background text-foreground transition-transform duration-300 ease-out ${
         open ? "translate-y-0" : "pointer-events-none translate-y-full"
       }`}
