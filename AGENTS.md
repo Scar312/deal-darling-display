@@ -10,3 +10,4 @@
 <!-- LOVABLE:END -->
 
 - Keep checkout fee constants and total/promo calculations in `src/lib/checkout-pricing.ts` so the checkout display and pricing tests share one source of truth.
+- Keep the root error page in a lazily loaded component because the current TanStack Start root error boundary expects a lazy route component.
