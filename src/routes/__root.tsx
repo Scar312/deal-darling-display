@@ -3,6 +3,7 @@ import {
   Outlet,
   Link,
   createRootRouteWithContext,
+  ErrorComponent as TanStackErrorComponent,
   useRouter,
   HeadContent,
   Scripts,
@@ -104,7 +105,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
   shellComponent: RootShell,
   component: RootComponent,
   notFoundComponent: NotFoundComponent,
-  errorComponent: ErrorComponent,
+  errorComponent: TanStackErrorComponent,
 });
 
 function RootShell({ children }: { children: ReactNode }) {
