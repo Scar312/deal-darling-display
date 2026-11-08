@@ -204,16 +204,18 @@ function Checkout() {
         </div>
       </div>
 
-      <PromotionsSheet
-        open={sheetOpen}
-        onClose={() => setSheetOpen(false)}
-        codeApplied={codeApplied}
-        onApplyCode={setCodeApplied}
-        onRemoveCode={() => setCodeApplied(null)}
-        fourOffSelected={fourOff}
-        onToggleFourOff={() => setFourOff((selected) => !selected)}
-        couponImg={couponImg}
-      />
+      {sheetOpen && (
+        <PromotionsSheet
+          open={sheetOpen}
+          onClose={() => setSheetOpen(false)}
+          codeApplied={codeApplied}
+          onApplyCode={setCodeApplied}
+          onRemoveCode={() => setCodeApplied(null)}
+          fourOffSelected={fourOff}
+          onToggleFourOff={() => setFourOff((selected) => !selected)}
+          couponImg={couponImg}
+        />
+      )}
     </main>
   );
 }
