@@ -195,25 +195,27 @@ function Checkout() {
       </section>
 
       <div className="fixed inset-x-0 bottom-0 z-20 mx-auto w-full max-w-[480px] bg-background">
-        <div className="checkout-savings flex min-h-[82px] items-center gap-4 px-5 py-3">
+        <div className="checkout-savings flex min-h-[82px] items-center gap-4 px-5 py-3 text-foreground">
           <span className="promo-discount-mark flex h-12 w-12 shrink-0 items-center justify-center text-[30px] font-medium leading-none text-white">$</span>
           <span className="text-[19px] font-medium">Saving $5.02 <span className="mt-1 block text-[16px] text-checkout-muted">with Offers</span></span>
         </div>
         <div className="bg-background px-5 pb-5 pt-3">
-          <Button className="h-[60px] w-full rounded-xl bg-foreground text-[20px] font-medium text-background hover:bg-foreground/90">Next</Button>
+          <Button className="h-[60px] w-full rounded-xl bg-foreground text-[20px] font-medium !text-background hover:bg-foreground/90">Next</Button>
         </div>
       </div>
 
-      <PromotionsSheet
-        open={sheetOpen}
-        onClose={() => setSheetOpen(false)}
-        codeApplied={codeApplied}
-        onApplyCode={setCodeApplied}
-        onRemoveCode={() => setCodeApplied(null)}
-        fourOffSelected={fourOff}
-        onToggleFourOff={() => setFourOff((selected) => !selected)}
-        couponImg={couponImg}
-      />
+      {sheetOpen && (
+        <PromotionsSheet
+          open={sheetOpen}
+          onClose={() => setSheetOpen(false)}
+          codeApplied={codeApplied}
+          onApplyCode={setCodeApplied}
+          onRemoveCode={() => setCodeApplied(null)}
+          fourOffSelected={fourOff}
+          onToggleFourOff={() => setFourOff((selected) => !selected)}
+          couponImg={couponImg}
+        />
+      )}
     </main>
   );
 }
