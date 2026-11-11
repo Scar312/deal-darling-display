@@ -276,7 +276,7 @@ function PriceRow({
   compact?: boolean;
 }) {
   return (
-    <div className={`flex min-h-[50px] items-center justify-between gap-3 py-2 ${strong ? "min-h-[58px]" : ""} ${compact ? "min-h-[34px] py-0.5" : ""}`}>
+    <div className={`flex items-center justify-between gap-3 ${compact ? (strong ? "min-h-[40px] py-0.5" : "min-h-[34px] py-0.5") : (strong ? "min-h-[58px] py-2" : "min-h-[50px] py-2")}`}>
       <span className={`text-[17px] ${highlight ? "font-medium text-checkout-red" : strong ? "text-[20px] font-semibold text-foreground" : "text-checkout-muted"}`}>{label}</span>
       <span className={`shrink-0 text-[17px] ${highlight ? "font-medium text-checkout-red" : strong ? "text-foreground" : "text-checkout-muted"}`}>{value}</span>
     </div>

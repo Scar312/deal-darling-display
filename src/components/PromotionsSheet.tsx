@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { ArrowLeft, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import burgerImg from "@/assets/uber/burger.jpg";
-import saladImg from "@/assets/uber/salad.png";
+
+const burgerImg = "/assets/burger.jpg";
+const saladImg = "/assets/salad-promo.png";
 
 interface PromotionsSheetProps {
   open: boolean;
