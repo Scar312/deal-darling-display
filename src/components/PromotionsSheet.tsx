@@ -13,6 +13,7 @@ interface PromotionsSheetProps {
   fourOffSelected: boolean;
   onToggleFourOff: () => void;
   couponImg: string;
+  discountImg: string;
 }
 
 export function PromotionsSheet({
@@ -24,6 +25,7 @@ export function PromotionsSheet({
   fourOffSelected,
   onToggleFourOff,
   couponImg,
+  discountImg,
 }: PromotionsSheetProps) {
   const [promoMode, setPromoMode] = useState(false);
   const [code, setCode] = useState("");
@@ -154,13 +156,13 @@ export function PromotionsSheet({
           <section className="mt-7">
             <h3 className="text-[21px] font-semibold leading-tight">One-per-order promotions</h3>
             <p className="mt-1 text-[15px] font-medium">Limit of one per order</p>
-            <PromotionCard title="Discounted Delivery Fee on us" image={null} selected>
+            <PromotionCard title="Discounted Delivery Fee on us" image={discountImg} selected>
               <p>Use by Dec 3, 2026 9 PM</p>
               <p>For 3 delivery orders · Only redeemable on delivery orders · Restaurant orders…</p>
             </PromotionCard>
             <PromotionCard
               title="Discounted Service Fee on us"
-              image={null}
+              image={discountImg}
               selected={fourOffSelected}
               onToggle={onToggleFourOff}
             >
@@ -203,9 +205,7 @@ function PromotionCard({
         <h4 className="min-w-0 flex-1 text-[23px] font-semibold leading-[1.18]">{title}</h4>
         {image ? (
           <img src={image} alt="" className="h-[58px] w-[58px] shrink-0 object-contain" />
-        ) : (
-          <span aria-hidden="true" className="promo-discount-mark flex h-[58px] w-[58px] shrink-0 items-center justify-center text-[33px] font-medium text-white">$</span>
-        )}
+        ) : null}
       </div>
       <div className="mt-3 space-y-0.5 text-[15px] font-medium leading-[1.45] text-checkout-muted">
         {children}

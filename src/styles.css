@@ -177,7 +177,7 @@
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
-    font-family: "Roboto", "Arial", ui-sans-serif, system-ui, sans-serif;
+    font-family: "Public Sans", ui-sans-serif, system-ui, sans-serif;
     font-weight: 400;
     font-stretch: 100%;
     -webkit-font-smoothing: antialiased;
