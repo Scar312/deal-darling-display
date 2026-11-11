@@ -11,3 +11,4 @@
 
 - Keep checkout fee constants and total/promo calculations in `src/lib/checkout-pricing.ts` so the checkout display and pricing tests share one source of truth.
 - Keep the root error page in a lazily loaded component because the current TanStack Start root error boundary expects a lazy route component.
+- Keep app-served image assets in `public/assets` and reference them by root-relative URL so they remain available on Vercel.

@@ -164,11 +164,6 @@
   background-image: linear-gradient(100deg, var(--checkout-savings-start), var(--checkout-savings-end));
 }
 
-.promo-discount-mark {
-  background-color: var(--checkout-red);
-  clip-path: polygon(50% 0%, 60% 10%, 74% 4%, 80% 17%, 94% 20%, 91% 35%, 100% 50%, 90% 61%, 96% 76%, 81% 81%, 77% 96%, 62% 91%, 50% 100%, 39% 90%, 23% 96%, 19% 81%, 5% 76%, 10% 61%, 0% 50%, 10% 38%, 4% 23%, 19% 18%, 23% 4%, 39% 10%);
-}
-
 @layer base {
   * {
     border-color: var(--color-border);
@@ -177,7 +172,7 @@
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
-    font-family: "Roboto", "Arial", ui-sans-serif, system-ui, sans-serif;
+    font-family: "Public Sans", ui-sans-serif, system-ui, sans-serif;
     font-weight: 400;
     font-stretch: 100%;
     -webkit-font-smoothing: antialiased;

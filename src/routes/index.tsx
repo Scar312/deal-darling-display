@@ -6,18 +6,20 @@ import {
   ChevronRight,
   Clock3,
   Info,
-  Tag,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { PromotionsSheet } from "@/components/PromotionsSheet";
-import couponImg from "@/assets/uber/coupon.png";
-import giftAsset from "@/assets/uber/gift.png.asset.json";
-import locationImg from "@/assets/uber/location.png";
-import mapImg from "@/assets/uber/map.jpg";
-import priorityImg from "@/assets/uber/priority.png";
-import storeImg from "@/assets/uber/store.png";
-import userIconImg from "@/assets/uber/user.png";
 import { calculateCheckoutTotals, checkoutPriceLines } from "@/lib/checkout-pricing";
+
+const couponImg = "/assets/coupon.png";
+const giftImg = "/assets/gift.png";
+const locationImg = "/assets/location.png";
+const mapImg = "/assets/map.jpg";
+const priorityImg = "/assets/priority.png";
+const storeImg = "/assets/mcdonalds-store.png";
+const userIconImg = "/assets/user.png";
+const visaImg = "/assets/visa-card.png";
+const discountImg = "/assets/promo-discount.png";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -123,7 +125,7 @@ function Checkout() {
         <Divider inset />
 
         <Button variant="ghost" className="flex h-auto w-full justify-start gap-3 px-0 py-3 text-left">
-          <img src={giftAsset.url} alt="" className="h-11 w-11 shrink-0 object-contain" />
+          <img src={giftImg} alt="" className="h-11 w-11 shrink-0 object-contain" />
           <span className="min-w-0 flex-1">
             <span className="block text-[17px] font-medium leading-tight">Send as a gift</span>
             <span className="mt-1 block text-[16px] text-checkout-muted">Add a personal message</span>
@@ -151,20 +153,22 @@ function Checkout() {
 
       <Divider className="mx-5 mt-1" />
 
-      <section aria-label="Order totals" className="px-5 pt-4">
-        <PriceRow label="Subtotal" value={money(checkoutPriceLines.subtotal)} />
+      <section aria-label="Order totals" className="px-5 pt-3">
+        <PriceRow label="Subtotal" value={money(checkoutPriceLines.subtotal)} compact />
         {codeApplied && (
-          <PriceRow label="Uber Credit Applied" value={`−${money(totals.codeDiscount)}`} highlight />
+          <PriceRow label="Uber Credit Applied" value={`−${money(totals.codeDiscount)}`} highlight compact />
         )}
         <PriceRow
           label={<span className="flex items-center gap-1.5">Delivery Fee <Info className="h-[17px] w-[17px] text-checkout-subtle" /></span>}
           value={<FeeValues original={checkoutPriceLines.originalDeliveryFee} current={checkoutPriceLines.deliveryFee} />}
+          compact
         />
         <PriceRow
           label={<span className="flex items-center gap-1.5">Other Fees <Info className="h-[17px] w-[17px] text-checkout-subtle" /></span>}
           value={<FeeValues original={checkoutPriceLines.originalOtherFees} current={checkoutPriceLines.otherFees} />}
+          compact
         />
-        <PriceRow label="Taxes" value={money(checkoutPriceLines.taxes)} />
+        <PriceRow label="Taxes" value={money(checkoutPriceLines.taxes)} compact />
         <PriceRow
           label="Total"
           value={
@@ -174,12 +178,13 @@ function Checkout() {
             </span>
           }
           strong
+          compact
         />
       </section>
 
-      <section className="px-5 pt-5">
+      <section className="px-5 pt-3">
         <Button variant="ghost" className="flex h-auto w-full justify-start gap-4 px-2 py-2 text-left">
-          <span className="flex h-[52px] w-[62px] shrink-0 items-center justify-center rounded-xl bg-primary text-[15px] font-bold text-primary-foreground">VISA</span>
+          <img src={visaImg} alt="Visa" className="h-12 w-12 shrink-0 object-contain" />
           <span className="min-w-0 flex-1 text-[18px] font-medium">Visa ••••5841 (Caseys)</span>
           <ChevronRight className="h-5 w-5 shrink-0 text-checkout-subtle" strokeWidth={2.4} />
         </Button>
@@ -196,7 +201,7 @@ function Checkout() {
 
       <div className="fixed inset-x-0 bottom-0 z-20 mx-auto w-full max-w-[480px] bg-background">
         <div className="checkout-savings flex min-h-[82px] items-center gap-4 px-5 py-3 text-foreground">
-          <span className="promo-discount-mark flex h-12 w-12 shrink-0 items-center justify-center text-[30px] font-medium leading-none text-white">$</span>
+          <img src={discountImg} alt="" className="h-12 w-12 shrink-0 object-contain" />
           <span className="text-[19px] font-medium">Saving $5.02 <span className="mt-1 block text-[16px] text-checkout-muted">with Offers</span></span>
         </div>
         <div className="bg-background px-5 pb-5 pt-3">
@@ -214,6 +219,7 @@ function Checkout() {
           fourOffSelected={fourOff}
           onToggleFourOff={() => setFourOff((selected) => !selected)}
           couponImg={couponImg}
+          discountImg={discountImg}
         />
       )}
     </main>
@@ -261,14 +267,16 @@ function PriceRow({
   value,
   highlight = false,
   strong = false,
+  compact = false,
 }: {
   label: React.ReactNode;
   value: React.ReactNode;
   highlight?: boolean;
   strong?: boolean;
+  compact?: boolean;
 }) {
   return (
-    <div className={`flex min-h-[50px] items-center justify-between gap-3 py-2 ${strong ? "min-h-[58px]" : ""}`}>
+    <div className={`flex items-center justify-between gap-3 ${compact ? (strong ? "min-h-[40px] py-0.5" : "min-h-[34px] py-0.5") : (strong ? "min-h-[58px] py-2" : "min-h-[50px] py-2")}`}>
       <span className={`text-[17px] ${highlight ? "font-medium text-checkout-red" : strong ? "text-[20px] font-semibold text-foreground" : "text-checkout-muted"}`}>{label}</span>
       <span className={`shrink-0 text-[17px] ${highlight ? "font-medium text-checkout-red" : strong ? "text-foreground" : "text-checkout-muted"}`}>{value}</span>
     </div>
