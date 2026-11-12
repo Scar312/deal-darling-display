@@ -258,7 +258,7 @@ function DeliveryOption({
     <Button
       variant="ghost"
       onClick={onClick}
-      className={`h-[138px] min-w-0 shrink-0 flex-col items-stretch justify-start whitespace-normal rounded-2xl border-2 px-3 py-3 text-left ${className} ${selected ? "border-foreground" : "border-checkout-separator"}`}
+      className={`h-[152px] min-w-0 shrink-0 flex-col items-stretch justify-start whitespace-normal rounded-2xl border-2 px-3 py-3 text-left ${className} ${selected ? "border-foreground" : "border-checkout-separator"}`}
     >
       {children}
     </Button>
