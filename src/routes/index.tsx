@@ -141,7 +141,7 @@ function Checkout() {
           className="flex h-auto w-full items-center justify-start gap-3 whitespace-normal px-0 py-3 text-left hover:bg-transparent"
         >
           <span className="flex w-9 shrink-0 items-center justify-center">
-            <img src={promoAppliedImg} alt="" className="h-[26px] w-[26px] object-contain" />
+            <img src={promoAppliedImg} alt="" className="h-[30px] w-[30px] object-contain" />
           </span>
           <span className="min-w-0 flex-1">
             <span className="block text-[17px] font-medium leading-[1.3]">2 promotions applied, 1 promotion available</span>
