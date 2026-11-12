@@ -7,3 +7,4 @@
 - [x] Verify refreshed prices, promo calculations, and mobile layout.
 - [x] Resize the phone icon and keep footer/icon colors unchanged when a promo is applied.
 - [x] Rotate restaurant imagery, names, offer details, and item counts on refresh; verify mobile checkout.
+- [x] Slightly reduce selected icons and match checkout typography, spacing, and colors to the latest references; verify mobile layout and promo behavior.
