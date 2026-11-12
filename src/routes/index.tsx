@@ -46,7 +46,7 @@ function Checkout() {
   const totals = calculateCheckoutTotals(Boolean(codeApplied));
 
   return (
-    <main className="mx-auto min-h-dvh w-full max-w-[480px] overflow-x-hidden bg-background pb-52 text-foreground">
+    <main className="mx-auto min-h-dvh w-full max-w-[480px] overflow-x-clip bg-background pb-52 text-foreground">
       <header className="sticky top-0 z-30 flex items-center bg-background px-5 pb-2 pt-3">
         <Button variant="ghost" size="icon" aria-label="Back" className="h-9 w-9 shrink-0">
           <ArrowLeft className="h-6 w-6" strokeWidth={2} />
@@ -93,7 +93,7 @@ function Checkout() {
           >
             <div className="flex items-center gap-2 text-[16px] font-medium">
               <span>8:27–8:53 AM</span>
-              <img src={priorityImg} alt="Priority" className="h-5 w-4 object-contain" />
+              <img src={priorityImg} alt="Priority" className="h-4 w-3 shrink-0 object-contain" />
             </div>
             <p className="mt-1 text-[14px] text-checkout-muted">Priority</p>
             <p className="mt-1 text-[14px] leading-6 text-checkout-green">Direct to you. Top-rated couriers</p>
@@ -256,7 +256,7 @@ function DeliveryOption({
     <Button
       variant="ghost"
       onClick={onClick}
-      className={`h-[138px] shrink-0 flex-col items-stretch justify-start whitespace-normal rounded-2xl border-2 px-3 py-3 text-left ${className} ${selected ? "border-foreground" : "border-checkout-separator"}`}
+      className={`h-[138px] min-w-0 shrink-0 flex-col items-stretch justify-start whitespace-normal rounded-2xl border-2 px-3 py-3 text-left ${className} ${selected ? "border-foreground" : "border-checkout-separator"}`}
     >
       {children}
     </Button>
