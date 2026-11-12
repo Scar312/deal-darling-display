@@ -2,6 +2,6 @@
 - [x] Rebuild the promotions sheet to match its references while retaining promo entry and selection interactions.
 - [x] Verify displayed totals, promo calculations, and the mobile preview.
 - [x] Organize checkout images under `public/assets/all-images/png/media`, improve mobile alignment, and use green applied-promo accents.
-- [ ] Randomize checkout amounts on refresh while keeping original and discounted totals below $131.
-- [ ] Match highlighted icon proportions, add Delivery/Pickup choices, and align the savings footer.
-- [ ] Verify refreshed prices, promo calculations, and mobile layout.
+- [x] Randomize checkout amounts on refresh while keeping original and discounted totals below $131.
+- [x] Match highlighted icon proportions, add Delivery/Pickup choices, and align the savings footer.
+- [x] Verify refreshed prices, promo calculations, and mobile layout.
