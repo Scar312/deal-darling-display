@@ -71,7 +71,7 @@ function Checkout() {
         </CheckoutRow>
         <Divider inset />
 
-        <CheckoutRow icon={<img src="/assets/phone-call.png" alt="" />}>
+        <CheckoutRow icon={<img src="/assets/phone-call.png" alt="" className="scale-125" />}>
           <p className="text-[17px] font-medium">+16507698710</p>
         </CheckoutRow>
         <Divider inset />
