@@ -13,3 +13,5 @@
 - Generate randomized checkout line items once after hydration per page load, then reuse them for fees, totals, and savings so refreshes change prices without hydration mismatches or inconsistent amounts.
 - Keep the root error page in a lazily loaded component because the current TanStack Start root error boundary expects a lazy route component.
 - Keep app-served image assets in `public/assets` and reference them by root-relative URL so they remain available on Vercel.
+
+- Keep restaurant selection in `src/lib/restaurants.ts`; select once after hydration and remember only the previous name locally to prevent consecutive refresh repeats without persisting orders.

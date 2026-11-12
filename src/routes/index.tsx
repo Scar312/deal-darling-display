@@ -11,13 +11,15 @@ import { Button } from "@/components/ui/button";
 import { PromotionsSheet } from "@/components/PromotionsSheet";
 import { calculateCheckoutTotals, checkoutPriceLines, randomizeCheckoutPrices, type CheckoutPriceLines } from "@/lib/checkout-pricing";
 
+import { restaurants, pickRestaurantOrder } from "@/lib/restaurants";
+
 const mediaPath = "/assets/all-images/png/media";
 const couponImg = `${mediaPath}/coupon.png`;
 const giftImg = `${mediaPath}/gift.png`;
 const locationImg = `${mediaPath}/location.png`;
 const mapImg = `${mediaPath}/map.jpg`;
 const priorityImg = `${mediaPath}/priority.png`;
-const storeImg = `${mediaPath}/mcdonalds-store.png`;
+
 const userIconImg = `${mediaPath}/user.png`;
 const visaImg = `${mediaPath}/visa-card.png`;
 const discountImg = `${mediaPath}/promo-discount.png`;
@@ -26,10 +28,10 @@ const promoAppliedImg = `${mediaPath}/promo-applied.png`;
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Delivery checkout | McDonald's" },
-      { name: "description", content: "Review your McDonald's delivery details, offers, and order total." },
-      { property: "og:title", content: "Delivery checkout | McDonald's" },
-      { property: "og:description", content: "Review your McDonald's delivery details, offers, and order total." },
+      { title: "Delivery checkout | Restaurant orders" },
+      { name: "description", content: "Review your restaurant delivery details, offers, and order total." },
+      { property: "og:title", content: "Delivery checkout | Restaurant orders" },
+      { property: "og:description", content: "Review your restaurant delivery details, offers, and order total." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -42,7 +44,16 @@ const money = (amount: number) => `$${amount.toFixed(2)}`;
 function Checkout() {
   const [fulfillment, setFulfillment] = useState("delivery");
   const [prices, setPrices] = useState<CheckoutPriceLines>(() => ({ ...checkoutPriceLines }));
-  useEffect(() => { setPrices(randomizeCheckoutPrices()); }, []);
+  const [order, setOrder] = useState({ restaurant: restaurants[0], itemCount: 15 });
+  useEffect(() => {
+    setPrices(randomizeCheckoutPrices());
+    let previous: string | null = null;
+    try { previous = window.localStorage.getItem("checkout-restaurant"); } catch {}
+    const next = pickRestaurantOrder(previous);
+    setOrder(next);
+    try { window.localStorage.setItem("checkout-restaurant", next.restaurant.name); } catch {}
+  }, []);
+  const storeName = order.restaurant.name;
   const [option, setOption] = useState("standard");
   const [sheetOpen, setSheetOpen] = useState(false);
   const [codeApplied, setCodeApplied] = useState<string | null>(null);
@@ -84,7 +95,7 @@ function Checkout() {
         </CheckoutRow>
         <Divider inset />
 
-        <CheckoutRow icon={<img src={`${mediaPath}/phone-call.png`} alt="" className="h-[28px] w-[28px] object-contain" />}>
+        <CheckoutRow icon={<img src={`${mediaPath}/phone-call.png`} alt="" className="h-[23px] w-[23px] object-contain" />}>
           <p className="text-[17px] font-medium">+1 650 769 8710</p>
         </CheckoutRow>
         <Divider inset />
@@ -127,10 +138,10 @@ function Checkout() {
         <h2 className="text-[22px] font-semibold">Order summary</h2>
 
         <Button variant="ghost" className="mt-3 flex h-auto w-full justify-start gap-3 whitespace-normal px-0 py-3 text-left hover:bg-transparent">
-          <img src={storeImg} alt="" className="h-9 w-9 shrink-0 rounded-full object-cover" />
+          <img src={order.restaurant.image} alt="" className="h-9 w-9 shrink-0 rounded-full object-cover" />
           <span className="min-w-0 flex-1">
-            <span className="block text-[17px] font-medium leading-tight">McDonald&apos;s®</span>
-            <span className="mt-1 block text-[16px] text-checkout-muted">15 items</span>
+            <span className="block text-[17px] font-medium leading-tight">{storeName}</span>
+            <span className="mt-1 block text-[16px] text-checkout-muted">{order.itemCount} items</span>
           </span>
           <ChevronDown className="h-5 w-5 shrink-0 text-checkout-subtle" strokeWidth={2.4} />
         </Button>
@@ -152,7 +163,7 @@ function Checkout() {
           className="flex h-auto w-full items-center justify-start gap-3 whitespace-normal px-0 py-3 text-left hover:bg-transparent"
         >
           <span className="flex w-9 shrink-0 items-center justify-center">
-            <img src={promoAppliedImg} alt="" className={`h-9 w-9 object-contain ${codeApplied ? "checkout-green-badge" : ""}`} />
+            <img src={promoAppliedImg} alt="" className="h-9 w-9 object-contain" />
           </span>
           <span className="min-w-0 flex-1">
             <span className="block text-[17px] font-medium leading-[1.3]">2 promotions applied, 1 promotion available</span>
@@ -202,18 +213,18 @@ function Checkout() {
         </Button>
 
         <label className="mt-4 flex cursor-pointer items-center gap-3 bg-checkout-surface px-4 py-4">
-          <span className="flex-1 text-[17px] font-medium leading-snug">Sign up to receive email offers and news from McDonald&apos;s</span>
+          <span className="flex-1 text-[17px] font-medium leading-snug">Sign up to receive email offers and news from {storeName}</span>
           <input type="checkbox" className="h-5 w-5 shrink-0 accent-foreground" />
         </label>
 
         <p className="mt-4 text-[14px] leading-[1.75] text-checkout-muted">
-          <span className="font-medium text-foreground">Privacy Notice:</span> By checking the box, you agree to McDonald&apos;s Terms &amp; Conditions and that Uber may share your name, email, and order information and history with McDonald&apos;s. McDonald&apos;s will use that information to send you promotional emails and personalize your McDonald&apos;s experience in accordance with McDonald&apos;s Privacy Statement. You can stop sharing in your app settings and find an unsubscribe link in each email from McDonald&apos;s. <a href="#" className="text-checkout-green">View Terms &amp; Conditions.</a> <a href="#" className="text-checkout-green">View Privacy Statement.</a>
+          <span className="font-medium text-foreground">Privacy Notice:</span> By checking the box, you agree to {storeName} Terms &amp; Conditions and that Uber may share your name, email, and order information and history with {storeName}. {storeName} will use that information to send you promotional emails and personalize your {storeName} experience in accordance with {storeName} Privacy Statement. You can stop sharing in your app settings and find an unsubscribe link in each email from {storeName}. <a href="#" className="text-checkout-green">View Terms &amp; Conditions.</a> <a href="#" className="text-checkout-green">View Privacy Statement.</a>
         </p>
       </section>
 
       <div className="fixed inset-x-0 bottom-0 z-20 mx-auto w-full max-w-[480px] bg-background">
-        <div className={`${codeApplied ? "checkout-savings-applied" : "checkout-savings"} grid min-h-[72px] grid-cols-[40px_minmax(0,1fr)] items-center gap-3 px-4 py-3 text-foreground`}>
-          <img src={discountImg} alt="" className={`h-10 w-10 shrink-0 object-contain ${codeApplied ? "checkout-green-badge" : ""}`} />
+        <div className={`checkout-savings grid min-h-[72px] grid-cols-[40px_minmax(0,1fr)] items-center gap-3 px-4 py-3 text-foreground`}>
+          <img src={discountImg} alt="" className="h-10 w-10 shrink-0 object-contain" />
           <span className="min-w-0 text-[19px] font-medium leading-tight">Saving {money(savings)} <span className="mt-1 block text-[16px] text-checkout-muted">with Offers</span></span>
         </div>
         <div className="bg-background px-4 pb-[max(20px,env(safe-area-inset-bottom))] pt-4">
@@ -233,6 +244,7 @@ function Checkout() {
             onToggleFourOff={() => setFourOff((selected) => !selected)}
             couponImg={couponImg}
             discountImg={discountImg}
+            restaurantName={storeName}
           />
         </div>
       )}
