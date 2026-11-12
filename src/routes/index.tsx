@@ -83,26 +83,26 @@ function Checkout() {
           <img src={mapImg} alt="Map showing your delivery location" className="aspect-[2.8/1] w-full object-cover" />
         </div>
 
-        <CheckoutRow icon={<img src={locationImg} alt="" className="h-[23px] w-[23px] object-contain" />}>
+        <CheckoutRow icon={<img src={locationImg} alt="" className="h-[22px] w-[22px] object-contain" />}>
           <p className="text-[17px] font-medium leading-tight">7428 Willow Creek Dr</p>
           <p className="mt-0.5 text-[15px] text-checkout-muted">Charlotte, NC</p>
         </CheckoutRow>
         <Divider inset />
 
-        <CheckoutRow icon={<img src={userIconImg} alt="" className="h-[23px] w-[23px] object-contain" />}>
+        <CheckoutRow icon={<img src={userIconImg} alt="" className="h-[22px] w-[22px] object-contain" />}>
           <p className="text-[17px] font-medium leading-tight">Meet at my door</p>
           <p className="mt-0.5 text-[15px] text-checkout-green">Add delivery instructions &amp; photos</p>
         </CheckoutRow>
         <Divider inset />
 
-        <CheckoutRow icon={<img src={`${mediaPath}/phone-call.png`} alt="" className="h-[23px] w-[23px] object-contain" />}>
+        <CheckoutRow icon={<img src={`${mediaPath}/phone-call.png`} alt="" className="h-[22px] w-[22px] object-contain" />}>
           <p className="text-[17px] font-medium">+1 650 769 8710</p>
         </CheckoutRow>
         <Divider inset />
 
         <div className="flex items-center justify-between gap-3 py-4">
           <div className="flex min-w-0 items-center gap-3">
-            <span className="flex w-9 shrink-0 justify-center"><Clock3 className="h-6 w-6 text-checkout-muted" strokeWidth={1.8} /></span>
+            <span className="flex w-9 shrink-0 justify-center"><Clock3 className="h-[22px] w-[22px] text-checkout-muted" strokeWidth={1.8} /></span>
             <span className="text-[17px] font-medium">{fulfillment === "delivery" ? "Delivery time" : "Pickup time"}</span>
           </div>
           <span className="shrink-0 text-[16px] font-medium text-checkout-muted">8:34–9:02 AM</span>
@@ -148,7 +148,7 @@ function Checkout() {
         <Divider inset />
 
         <Button variant="ghost" className="flex h-auto w-full justify-start gap-3 whitespace-normal px-0 py-3 text-left hover:bg-transparent">
-          <span className="flex w-9 shrink-0 justify-center"><img src={giftImg} alt="" className="h-[30px] w-[27px] object-contain" /></span>
+          <span className="flex w-9 shrink-0 justify-center"><img src={giftImg} alt="" className="h-9 w-9 object-contain" /></span>
           <span className="min-w-0 flex-1">
             <span className="block text-[17px] font-medium leading-tight">Send as a gift</span>
             <span className="mt-1 block text-[16px] text-checkout-muted">Add a personal message</span>
@@ -223,9 +223,9 @@ function Checkout() {
       </section>
 
       <div className="fixed inset-x-0 bottom-0 z-20 mx-auto w-full max-w-[480px] bg-background">
-        <div className={`checkout-savings grid min-h-[72px] grid-cols-[40px_minmax(0,1fr)] items-center gap-3 px-4 py-3 text-foreground`}>
-          <img src={discountImg} alt="" className="h-10 w-10 shrink-0 object-contain" />
-          <span className="min-w-0 text-[19px] font-medium leading-tight">Saving {money(savings)} <span className="mt-1 block text-[16px] text-checkout-muted">with Offers</span></span>
+        <div className={`checkout-savings grid min-h-[76px] grid-cols-[48px_minmax(0,1fr)] items-center gap-3 px-4 py-3 text-foreground`}>
+          <img src={discountImg} alt="" className="h-12 w-12 shrink-0 object-contain" />
+          <span className="min-w-0 text-[18px] font-medium leading-tight">Saving {money(savings)} <span className="mt-0.5 block text-[15px] text-checkout-muted">with Offers</span></span>
         </div>
         <div className="bg-background px-4 pb-[max(20px,env(safe-area-inset-bottom))] pt-4">
           <Button className="h-[60px] w-full rounded-xl bg-foreground text-[20px] font-medium !text-background hover:bg-foreground/90">Next</Button>
