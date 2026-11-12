@@ -16,6 +16,7 @@ interface PromotionsSheetProps {
   onToggleFourOff: () => void;
   couponImg: string;
   discountImg: string;
+  restaurantName: string;
 }
 
 export function PromotionsSheet({
@@ -28,6 +29,7 @@ export function PromotionsSheet({
   onToggleFourOff,
   couponImg,
   discountImg,
+  restaurantName,
 }: PromotionsSheetProps) {
   const [promoMode, setPromoMode] = useState(false);
   const [code, setCode] = useState("");
@@ -133,13 +135,13 @@ export function PromotionsSheet({
             <div className="mt-4 flex items-center justify-between gap-3 border-y border-checkout-separator py-4">
               <div>
                 <div className="text-[16px] font-medium text-checkout-green">Promo code applied</div>
-                <div className="mt-1 text-[14px] text-checkout-muted">Code: {codeApplied} · 87% off</div>
+                <div className="mt-1 text-[14px] text-checkout-muted">Code: <span className="text-checkout-green">{codeApplied}</span> · 87% off</div>
               </div>
               <Button
                 variant="link"
                 tabIndex={open ? 0 : -1}
                 onClick={onRemoveCode}
-                className="px-2 text-[14px] font-medium text-checkout-green"
+                className="px-2 text-[14px] font-medium text-foreground"
               >
                 Remove
               </Button>
@@ -149,7 +151,7 @@ export function PromotionsSheet({
           <section className="mt-7">
             <h3 className="text-[21px] font-semibold leading-tight">Promotions you can stack</h3>
             <p className="mt-1 text-[15px] font-medium">Use with other promotions</p>
-            <PromotionCard title="Free Item on $15+" image={saladImg} selected={false}>
+            <PromotionCard restaurantName={restaurantName} title="Free Item on $15+" image={saladImg} selected={false}>
               <p>Valid for current order while supplies last</p>
               <p>Get 1 of this item for free with this order when you spend at least $15 (excluding…</p>
             </PromotionCard>
@@ -158,11 +160,12 @@ export function PromotionsSheet({
           <section className="mt-7">
             <h3 className="text-[21px] font-semibold leading-tight">One-per-order promotions</h3>
             <p className="mt-1 text-[15px] font-medium">Limit of one per order</p>
-            <PromotionCard title="Discounted Delivery Fee on us" image={discountImg} selected>
+            <PromotionCard restaurantName={restaurantName} title="Discounted Delivery Fee on us" image={discountImg} selected>
               <p>Use by Dec 3, 2026 9 PM</p>
               <p>For 3 delivery orders · Only redeemable on delivery orders · Restaurant orders…</p>
             </PromotionCard>
             <PromotionCard
+              restaurantName={restaurantName}
               title="Discounted Service Fee on us"
               image={discountImg}
               selected={fourOffSelected}
@@ -191,12 +194,14 @@ function PromotionCard({
   image,
   selected,
   onToggle,
+  restaurantName,
   children,
 }: {
   title: string;
   image: string | null;
   selected: boolean;
   onToggle?: () => void;
+  restaurantName: string;
   children: React.ReactNode;
 }) {
   const [showDetails, setShowDetails] = useState(false);
@@ -208,7 +213,7 @@ function PromotionCard({
           <h4 className="text-[23px] font-bold leading-[1.18] tracking-[-0.01em]">{title}</h4>
           <div className="mt-2 text-[14px] font-medium leading-[1.42] text-checkout-muted">
             {children}
-            {showDetails && <p>Valid on eligible McDonald&apos;s delivery orders. Conditions apply.</p>}
+            {showDetails && <p>Valid on eligible {restaurantName} delivery orders. Conditions apply.</p>}
           </div>
         </div>
         {image ? (
