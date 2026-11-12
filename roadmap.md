@@ -5,5 +5,5 @@
 - [x] Randomize checkout amounts on refresh while keeping original and discounted totals below $131.
 - [x] Match highlighted icon proportions, add Delivery/Pickup choices, and align the savings footer.
 - [x] Verify refreshed prices, promo calculations, and mobile layout.
-- [ ] Resize the phone icon and keep footer/icon colors unchanged when a promo is applied.
-- [ ] Rotate restaurant imagery, names, offer details, and item counts on refresh; verify mobile checkout.
+- [x] Resize the phone icon and keep footer/icon colors unchanged when a promo is applied.
+- [x] Rotate restaurant imagery, names, offer details, and item counts on refresh; verify mobile checkout.
