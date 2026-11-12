@@ -21,6 +21,7 @@ const storeImg = `${mediaPath}/mcdonalds-store.png`;
 const userIconImg = `${mediaPath}/user.png`;
 const visaImg = `${mediaPath}/visa-card.png`;
 const discountImg = `${mediaPath}/promo-discount.png`;
+const promoAppliedImg = `${mediaPath}/promo-applied.png`;
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -125,7 +126,7 @@ function Checkout() {
         <Divider inset />
 
         <Button variant="ghost" className="flex h-auto w-full justify-start gap-3 whitespace-normal px-0 py-3 text-left hover:bg-transparent">
-          <span className="flex w-9 shrink-0 justify-center"><img src={giftImg} alt="" className="h-[30px] w-[27px] object-contain" /></span>
+          <span className="flex w-9 shrink-0 justify-center"><img src={giftImg} alt="" className="h-[36px] w-[32px] object-contain" /></span>
           <span className="min-w-0 flex-1">
             <span className="block text-[17px] font-medium leading-tight">Send as a gift</span>
             <span className="mt-1 block text-[16px] text-checkout-muted">Add a personal message</span>
@@ -140,7 +141,7 @@ function Checkout() {
           className="flex h-auto w-full items-center justify-start gap-3 whitespace-normal px-0 py-3 text-left hover:bg-transparent"
         >
           <span className="flex w-9 shrink-0 items-center justify-center">
-            <img src={couponImg} alt="" className="h-[22px] w-[22px] object-contain" />
+            <img src={promoAppliedImg} alt="" className="h-[30px] w-[30px] object-contain" />
           </span>
           <span className="min-w-0 flex-1">
             <span className="block text-[17px] font-medium leading-[1.3]">2 promotions applied, 1 promotion available</span>
