@@ -9,18 +9,27 @@ export const checkoutPriceLines = {
 
 const roundMoney = (amount: number) => Math.round((amount + Number.EPSILON) * 100) / 100;
 
-export function calculateCheckoutTotals(codeApplied: boolean) {
+export type CheckoutPriceLines = { [Key in keyof typeof checkoutPriceLines]: number };
+
+export function randomizeCheckoutPrices(random: () => number = Math.random): CheckoutPriceLines {
+  const similarAmount = (amount: number) =>
+    roundMoney(amount * (0.94 + Math.min(1, Math.max(0, random())) * 0.06));
+  return {
+    subtotal: similarAmount(checkoutPriceLines.subtotal),
+    deliveryFee: 0,
+    originalDeliveryFee: similarAmount(checkoutPriceLines.originalDeliveryFee),
+    otherFees: similarAmount(checkoutPriceLines.otherFees),
+    originalOtherFees: similarAmount(checkoutPriceLines.originalOtherFees),
+    taxes: similarAmount(checkoutPriceLines.taxes),
+  };
+}
+
+export function calculateCheckoutTotals(codeApplied: boolean, prices: CheckoutPriceLines = checkoutPriceLines) {
   const originalTotal = roundMoney(
-    checkoutPriceLines.subtotal +
-      checkoutPriceLines.originalDeliveryFee +
-      checkoutPriceLines.originalOtherFees +
-      checkoutPriceLines.taxes,
+    prices.subtotal + prices.originalDeliveryFee + prices.originalOtherFees + prices.taxes,
   );
   const total = roundMoney(
-    checkoutPriceLines.subtotal +
-      checkoutPriceLines.deliveryFee +
-      checkoutPriceLines.otherFees +
-      checkoutPriceLines.taxes,
+    prices.subtotal + prices.deliveryFee + prices.otherFees + prices.taxes,
   );
   const codeDiscount = codeApplied ? roundMoney(total * 0.87) : 0;
 
