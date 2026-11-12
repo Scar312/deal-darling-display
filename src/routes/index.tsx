@@ -211,17 +211,19 @@ function Checkout() {
       </div>
 
       {sheetOpen && (
-        <PromotionsSheet
-          open={sheetOpen}
-          onClose={() => setSheetOpen(false)}
-          codeApplied={codeApplied}
-          onApplyCode={setCodeApplied}
-          onRemoveCode={() => setCodeApplied(null)}
-          fourOffSelected={fourOff}
-          onToggleFourOff={() => setFourOff((selected) => !selected)}
-          couponImg={couponImg}
-          discountImg={discountImg}
-        />
+        <div className="fixed inset-0 z-40 overflow-y-auto bg-background">
+          <PromotionsSheet
+            open={sheetOpen}
+            onClose={() => setSheetOpen(false)}
+            codeApplied={codeApplied}
+            onApplyCode={setCodeApplied}
+            onRemoveCode={() => setCodeApplied(null)}
+            fourOffSelected={fourOff}
+            onToggleFourOff={() => setFourOff((selected) => !selected)}
+            couponImg={couponImg}
+            discountImg={discountImg}
+          />
+        </div>
       )}
     </main>
   );
