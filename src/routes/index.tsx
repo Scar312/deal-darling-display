@@ -11,15 +11,16 @@ import { Button } from "@/components/ui/button";
 import { PromotionsSheet } from "@/components/PromotionsSheet";
 import { calculateCheckoutTotals, checkoutPriceLines } from "@/lib/checkout-pricing";
 
-const couponImg = "/assets/coupon.png";
-const giftImg = "/assets/gift.png";
-const locationImg = "/assets/location.png";
-const mapImg = "/assets/map.jpg";
-const priorityImg = "/assets/priority.png";
-const storeImg = "/assets/mcdonalds-store.png";
-const userIconImg = "/assets/user.png";
-const visaImg = "/assets/visa-card.png";
-const discountImg = "/assets/promo-discount.png";
+const mediaPath = "/assets/all-images/png/media";
+const couponImg = `${mediaPath}/coupon.png`;
+const giftImg = `${mediaPath}/gift.png`;
+const locationImg = `${mediaPath}/location.png`;
+const mapImg = `${mediaPath}/map.jpg`;
+const priorityImg = `${mediaPath}/priority.png`;
+const storeImg = `${mediaPath}/mcdonalds-store.png`;
+const userIconImg = `${mediaPath}/user.png`;
+const visaImg = `${mediaPath}/visa-card.png`;
+const discountImg = `${mediaPath}/promo-discount.png`;
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -45,7 +46,7 @@ function Checkout() {
   const totals = calculateCheckoutTotals(Boolean(codeApplied));
 
   return (
-    <main className="mx-auto min-h-dvh w-full max-w-[480px] bg-background pb-52 text-foreground">
+    <main className="mx-auto min-h-dvh w-full max-w-[480px] overflow-x-hidden bg-background pb-52 text-foreground">
       <header className="sticky top-0 z-30 flex items-center bg-background px-5 pb-2 pt-3">
         <Button variant="ghost" size="icon" aria-label="Back" className="h-9 w-9 shrink-0">
           <ArrowLeft className="h-6 w-6" strokeWidth={2} />
@@ -71,7 +72,7 @@ function Checkout() {
         </CheckoutRow>
         <Divider inset />
 
-        <CheckoutRow icon={<img src="/assets/phone-call.png" alt="" className="scale-125" />}>
+        <CheckoutRow icon={<img src={`${mediaPath}/phone-call.png`} alt="" className="scale-125" />}>
           <p className="text-[17px] font-medium">+16507698710</p>
         </CheckoutRow>
         <Divider inset />
@@ -84,11 +85,11 @@ function Checkout() {
           <span className="text-[16px] font-medium text-checkout-muted">8:34–9:02 AM</span>
         </div>
 
-        <div className="-mx-5 flex gap-2.5 overflow-x-auto px-5 pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        <div className="-mx-5 flex min-w-0 gap-2.5 overflow-x-auto px-5 pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           <DeliveryOption
             selected={option === "priority"}
             onClick={() => setOption("priority")}
-            className="min-w-[42%]"
+            className="w-[42%] basis-[42%]"
           >
             <div className="flex items-center gap-2 text-[16px] font-medium">
               <span>8:27–8:53 AM</span>
@@ -98,11 +99,11 @@ function Checkout() {
             <p className="mt-1 text-[14px] leading-6 text-checkout-green">Direct to you. Top-rated couriers</p>
             <p className="mt-0.5 text-[14px] text-checkout-muted">+$1.49</p>
           </DeliveryOption>
-          <DeliveryOption selected={option === "standard"} onClick={() => setOption("standard")} className="min-w-[42%]">
+          <DeliveryOption selected={option === "standard"} onClick={() => setOption("standard")} className="w-[42%] basis-[42%]">
             <p className="text-[16px] font-medium">8:34–9:02 AM</p>
             <p className="mt-1 text-[14px] text-checkout-muted">Standard</p>
           </DeliveryOption>
-          <DeliveryOption selected={option === "schedule"} onClick={() => setOption("schedule")} className="min-w-[38%]">
+          <DeliveryOption selected={option === "schedule"} onClick={() => setOption("schedule")} className="w-[42%] basis-[42%]">
             <p className="text-[16px] font-medium">Schedule</p>
             <p className="mt-1 text-[14px] text-checkout-muted">Earliest: 9:18 AM</p>
           </DeliveryOption>
@@ -145,7 +146,7 @@ function Checkout() {
           <span className="min-w-0 flex-1">
             <span className="block text-[17px] font-medium leading-snug">2 promotions applied, 1 promotion available</span>
             <span className="mt-1 block text-[16px] leading-snug text-checkout-muted">Discounted Service Fee on us</span>
-            {codeApplied && <span className="mt-1 block text-[14px] font-medium text-checkout-red">Promo code {codeApplied} applied</span>}
+            {codeApplied && <span className="mt-1 block text-[14px] font-medium text-checkout-green">Promo code {codeApplied} applied</span>}
           </span>
           <ChevronRight className="h-5 w-5 shrink-0 text-checkout-subtle" strokeWidth={2.4} />
         </Button>
@@ -277,8 +278,8 @@ function PriceRow({
 }) {
   return (
     <div className={`flex items-center justify-between gap-3 ${compact ? (strong ? "min-h-[40px] py-0.5" : "min-h-[34px] py-0.5") : (strong ? "min-h-[58px] py-2" : "min-h-[50px] py-2")}`}>
-      <span className={`text-[17px] ${highlight ? "font-medium text-checkout-red" : strong ? "text-[20px] font-semibold text-foreground" : "text-checkout-muted"}`}>{label}</span>
-      <span className={`shrink-0 text-[17px] ${highlight ? "font-medium text-checkout-red" : strong ? "text-foreground" : "text-checkout-muted"}`}>{value}</span>
+      <span className={`text-[17px] ${highlight ? "font-medium text-checkout-green" : strong ? "text-[20px] font-semibold text-foreground" : "text-checkout-muted"}`}>{label}</span>
+      <span className={`shrink-0 text-[17px] ${highlight ? "font-medium text-checkout-green" : strong ? "text-foreground" : "text-checkout-muted"}`}>{value}</span>
     </div>
   );
 }
