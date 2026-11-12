@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   ArrowLeft,
   ChevronDown,
@@ -9,7 +9,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { PromotionsSheet } from "@/components/PromotionsSheet";
-import { calculateCheckoutTotals, checkoutPriceLines } from "@/lib/checkout-pricing";
+import { calculateCheckoutTotals, checkoutPriceLines, randomizeCheckoutPrices, type CheckoutPriceLines } from "@/lib/checkout-pricing";
 
 const mediaPath = "/assets/all-images/png/media";
 const couponImg = `${mediaPath}/coupon.png`;
@@ -40,11 +40,15 @@ export const Route = createFileRoute("/")({
 const money = (amount: number) => `$${amount.toFixed(2)}`;
 
 function Checkout() {
+  const [fulfillment, setFulfillment] = useState("delivery");
+  const [prices, setPrices] = useState<CheckoutPriceLines>(() => ({ ...checkoutPriceLines }));
+  useEffect(() => { setPrices(randomizeCheckoutPrices()); }, []);
   const [option, setOption] = useState("standard");
   const [sheetOpen, setSheetOpen] = useState(false);
   const [codeApplied, setCodeApplied] = useState<string | null>(null);
   const [fourOff, setFourOff] = useState(true);
-  const totals = calculateCheckoutTotals(Boolean(codeApplied));
+  const totals = calculateCheckoutTotals(Boolean(codeApplied), prices);
+  const savings = Math.round((totals.originalTotal - totals.total) * 100) / 100;
 
   return (
     <main className="mx-auto min-h-dvh w-full max-w-[480px] overflow-x-clip bg-background pb-52 text-foreground">
@@ -57,8 +61,15 @@ function Checkout() {
       </header>
 
       <section className="px-4 pt-2">
+        <div role="group" aria-label="Order type" className="mb-4 grid grid-cols-2 rounded-full bg-checkout-surface p-1">
+          {(["delivery", "pickup"] as const).map((mode) => (
+            <Button key={mode} variant="ghost" aria-pressed={fulfillment === mode} onClick={() => setFulfillment(mode)} className={`h-11 rounded-full text-[17px] font-semibold ${fulfillment === mode ? "bg-background hover:bg-background" : "hover:bg-transparent"}`}>
+              {mode === "delivery" ? "Delivery" : "Pickup"}
+            </Button>
+          ))}
+        </div>
         <div className="overflow-hidden rounded-2xl">
-          <img src={mapImg} alt="Map showing your delivery location" className="h-[122px] w-full object-cover" />
+          <img src={mapImg} alt="Map showing your delivery location" className="aspect-[2.8/1] w-full object-cover" />
         </div>
 
         <CheckoutRow icon={<img src={locationImg} alt="" className="h-[23px] w-[23px] object-contain" />}>
@@ -73,7 +84,7 @@ function Checkout() {
         </CheckoutRow>
         <Divider inset />
 
-        <CheckoutRow icon={<img src={`${mediaPath}/phone-call.png`} alt="" className="h-[25px] w-[25px] object-contain" />}>
+        <CheckoutRow icon={<img src={`${mediaPath}/phone-call.png`} alt="" className="h-[28px] w-[28px] object-contain" />}>
           <p className="text-[17px] font-medium">+1 650 769 8710</p>
         </CheckoutRow>
         <Divider inset />
@@ -81,7 +92,7 @@ function Checkout() {
         <div className="flex items-center justify-between gap-3 py-4">
           <div className="flex min-w-0 items-center gap-3">
             <span className="flex w-9 shrink-0 justify-center"><Clock3 className="h-6 w-6 text-checkout-muted" strokeWidth={1.8} /></span>
-            <span className="text-[17px] font-medium">Delivery time</span>
+            <span className="text-[17px] font-medium">{fulfillment === "delivery" ? "Delivery time" : "Pickup time"}</span>
           </div>
           <span className="shrink-0 text-[16px] font-medium text-checkout-muted">8:34–9:02 AM</span>
         </div>
@@ -126,7 +137,7 @@ function Checkout() {
         <Divider inset />
 
         <Button variant="ghost" className="flex h-auto w-full justify-start gap-3 whitespace-normal px-0 py-3 text-left hover:bg-transparent">
-          <span className="flex w-9 shrink-0 justify-center"><img src={giftImg} alt="" className="h-[36px] w-[32px] object-contain" /></span>
+          <span className="flex w-9 shrink-0 justify-center"><img src={giftImg} alt="" className="h-[30px] w-[27px] object-contain" /></span>
           <span className="min-w-0 flex-1">
             <span className="block text-[17px] font-medium leading-tight">Send as a gift</span>
             <span className="mt-1 block text-[16px] text-checkout-muted">Add a personal message</span>
@@ -141,7 +152,7 @@ function Checkout() {
           className="flex h-auto w-full items-center justify-start gap-3 whitespace-normal px-0 py-3 text-left hover:bg-transparent"
         >
           <span className="flex w-9 shrink-0 items-center justify-center">
-            <img src={promoAppliedImg} alt="" className="h-[30px] w-[30px] object-contain" />
+            <img src={promoAppliedImg} alt="" className={`h-9 w-9 object-contain ${codeApplied ? "checkout-green-badge" : ""}`} />
           </span>
           <span className="min-w-0 flex-1">
             <span className="block text-[17px] font-medium leading-[1.3]">2 promotions applied, 1 promotion available</span>
@@ -155,21 +166,21 @@ function Checkout() {
       <Divider className="mx-4 mt-1" />
 
       <section aria-label="Order totals" className="px-4 pt-3">
-        <PriceRow label="Subtotal" value={money(checkoutPriceLines.subtotal)} compact />
+        <PriceRow label="Subtotal" value={money(prices.subtotal)} compact />
         {codeApplied && (
           <PriceRow label="Uber Credit Applied" value={`−${money(totals.codeDiscount)}`} highlight compact />
         )}
         <PriceRow
           label={<span className="flex items-center gap-1.5">Delivery Fee <Info className="h-[17px] w-[17px] text-checkout-subtle" /></span>}
-          value={<FeeValues original={checkoutPriceLines.originalDeliveryFee} current={checkoutPriceLines.deliveryFee} />}
+          value={<FeeValues original={prices.originalDeliveryFee} current={prices.deliveryFee} />}
           compact
         />
         <PriceRow
           label={<span className="flex items-center gap-1.5">Other Fees <Info className="h-[17px] w-[17px] text-checkout-subtle" /></span>}
-          value={<FeeValues original={checkoutPriceLines.originalOtherFees} current={checkoutPriceLines.otherFees} />}
+          value={<FeeValues original={prices.originalOtherFees} current={prices.otherFees} />}
           compact
         />
-        <PriceRow label="Taxes" value={money(checkoutPriceLines.taxes)} compact />
+        <PriceRow label="Taxes" value={money(prices.taxes)} compact />
         <PriceRow
           label="Total"
           value={
@@ -185,7 +196,7 @@ function Checkout() {
 
       <section className="px-4 pt-3">
         <Button variant="ghost" className="flex h-auto w-full items-center justify-start gap-3 whitespace-normal px-0 py-3 text-left hover:bg-transparent">
-          <span className="flex w-9 shrink-0 justify-center"><img src={visaImg} alt="Visa" className="h-[32px] w-[32px] object-contain" /></span>
+          <span className="flex w-9 shrink-0 justify-center"><img src={visaImg} alt="Visa" className="h-[33px] w-[33px] object-contain" /></span>
           <span className="min-w-0 flex-1 text-[17px] font-medium">Visa ••••5841 (Caseys)</span>
           <ChevronRight className="h-5 w-5 shrink-0 text-checkout-subtle" strokeWidth={2.4} />
         </Button>
@@ -201,11 +212,11 @@ function Checkout() {
       </section>
 
       <div className="fixed inset-x-0 bottom-0 z-20 mx-auto w-full max-w-[480px] bg-background">
-        <div className="checkout-savings flex min-h-[82px] items-center gap-4 px-5 py-3 text-foreground">
-          <img src={discountImg} alt="" className="h-12 w-12 shrink-0 object-contain" />
-          <span className="text-[19px] font-medium">Saving $5.02 <span className="mt-1 block text-[16px] text-checkout-muted">with Offers</span></span>
+        <div className={`${codeApplied ? "checkout-savings-applied" : "checkout-savings"} grid min-h-[72px] grid-cols-[40px_minmax(0,1fr)] items-center gap-3 px-4 py-3 text-foreground`}>
+          <img src={discountImg} alt="" className={`h-10 w-10 shrink-0 object-contain ${codeApplied ? "checkout-green-badge" : ""}`} />
+          <span className="min-w-0 text-[19px] font-medium leading-tight">Saving {money(savings)} <span className="mt-1 block text-[16px] text-checkout-muted">with Offers</span></span>
         </div>
-        <div className="bg-background px-5 pb-5 pt-3">
+        <div className="bg-background px-4 pb-[max(20px,env(safe-area-inset-bottom))] pt-4">
           <Button className="h-[60px] w-full rounded-xl bg-foreground text-[20px] font-medium !text-background hover:bg-foreground/90">Next</Button>
         </div>
       </div>
