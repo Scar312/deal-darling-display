@@ -206,13 +206,13 @@ function PromotionCard({
       <div className="flex items-start gap-2">
         <div className="min-w-0 flex-1">
           <h4 className="text-[23px] font-bold leading-[1.18] tracking-[-0.01em]">{title}</h4>
-          <div className="mt-2 text-[14.5px] font-medium leading-[1.4] text-checkout-muted">
+          <div className="mt-2 text-[14px] font-medium leading-[1.42] text-checkout-muted">
             {children}
             {showDetails && <p>Valid on eligible McDonald&apos;s delivery orders. Conditions apply.</p>}
           </div>
         </div>
         {image ? (
-          <img src={image} alt="" className="mt-1 h-[50px] w-[50px] shrink-0 object-contain" />
+          <img src={image} alt="" className="mt-1 h-[48px] w-[48px] shrink-0 object-contain" />
         ) : null}
       </div>
       <div className="mt-4 flex items-center gap-5">
