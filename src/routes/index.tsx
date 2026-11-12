@@ -9,7 +9,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { PromotionsSheet } from "@/components/PromotionsSheet";
-import { calculateCheckoutTotals, checkoutPriceLines, randomizeCheckoutPrices } from "@/lib/checkout-pricing";
+import { calculateCheckoutTotals, checkoutPriceLines, randomizeCheckoutPrices, type CheckoutPriceLines } from "@/lib/checkout-pricing";
 
 const mediaPath = "/assets/all-images/png/media";
 const couponImg = `${mediaPath}/coupon.png`;
@@ -41,7 +41,7 @@ const money = (amount: number) => `$${amount.toFixed(2)}`;
 
 function Checkout() {
   const [fulfillment, setFulfillment] = useState("delivery");
-  const [prices, setPrices] = useState(() => ({ ...checkoutPriceLines }));
+  const [prices, setPrices] = useState<CheckoutPriceLines>(() => ({ ...checkoutPriceLines }));
   useEffect(() => { setPrices(randomizeCheckoutPrices()); }, []);
   const [option, setOption] = useState("standard");
   const [sheetOpen, setSheetOpen] = useState(false);
@@ -152,7 +152,7 @@ function Checkout() {
           className="flex h-auto w-full items-center justify-start gap-3 whitespace-normal px-0 py-3 text-left hover:bg-transparent"
         >
           <span className="flex w-9 shrink-0 items-center justify-center">
-            <img src={promoAppliedImg} alt="" className="h-9 w-9 object-contain" />
+            <img src={promoAppliedImg} alt="" className={`h-9 w-9 object-contain ${codeApplied ? "checkout-green-badge" : ""}`} />
           </span>
           <span className="min-w-0 flex-1">
             <span className="block text-[17px] font-medium leading-[1.3]">2 promotions applied, 1 promotion available</span>
