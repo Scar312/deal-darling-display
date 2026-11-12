@@ -92,8 +92,8 @@ export function PromotionsSheet({
 
       {promoMode ? (
         <div className="flex min-h-0 flex-1 flex-col px-4 pb-[env(safe-area-inset-bottom)] pt-1">
-          <label className="flex shrink-0 items-center gap-3 rounded-full bg-checkout-surface px-5 py-4">
-            <img src={couponImg} alt="" className="h-7 w-7 object-contain" />
+          <label className="flex h-[48px] shrink-0 items-center gap-3 rounded-full bg-checkout-surface px-5">
+            <img src={couponImg} alt="" className="h-5 w-5 shrink-0 object-contain" />
             <input
               autoFocus
               value={code}
@@ -123,9 +123,9 @@ export function PromotionsSheet({
             variant="ghost"
             onClick={() => setPromoMode(true)}
             tabIndex={open ? 0 : -1}
-            className="mt-1 flex h-auto w-full justify-start gap-3 rounded-full bg-checkout-surface px-5 py-4 text-left hover:bg-checkout-surface"
+            className="mt-1 flex h-[48px] w-full justify-start gap-3 rounded-full bg-checkout-surface px-5 text-left hover:bg-checkout-surface"
           >
-            <img src={couponImg} alt="" className="h-7 w-7 object-contain" />
+            <img src={couponImg} alt="" className="h-5 w-5 shrink-0 object-contain" />
             <span className="text-[17px] font-semibold text-checkout-muted">Enter promo code</span>
           </Button>
 
@@ -203,17 +203,19 @@ function PromotionCard({
 
   return (
     <article className={`mt-4 rounded-[16px] border-2 bg-background p-4 ${selected ? "border-foreground" : "border-checkout-separator"}`}>
-      <div className="flex items-start justify-between gap-3">
-        <h4 className="min-w-0 flex-1 text-[23px] font-semibold leading-[1.18]">{title}</h4>
+      <div className="flex items-start gap-3">
+        <div className="min-w-0 flex-1">
+          <h4 className="text-[23px] font-bold leading-[1.18] tracking-[-0.01em]">{title}</h4>
+          <div className="mt-2 text-[15px] font-medium leading-[1.4] text-checkout-muted">
+            {children}
+            {showDetails && <p>Valid on eligible McDonald&apos;s delivery orders. Conditions apply.</p>}
+          </div>
+        </div>
         {image ? (
-          <img src={image} alt="" className="h-[58px] w-[58px] shrink-0 object-contain" />
+          <img src={image} alt="" className="mt-1 h-[54px] w-[56px] shrink-0 object-contain" />
         ) : null}
       </div>
-      <div className="mt-3 space-y-0.5 text-[15px] font-medium leading-[1.45] text-checkout-muted">
-        {children}
-        {showDetails && <p>Valid on eligible McDonald&apos;s delivery orders. Conditions apply.</p>}
-      </div>
-      <div className="mt-5 flex items-center gap-5">
+      <div className="mt-4 flex items-center gap-5">
         <Button
           variant={selected ? "default" : "secondary"}
           onClick={onToggle}

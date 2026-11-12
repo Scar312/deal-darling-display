@@ -47,7 +47,7 @@ function Checkout() {
 
   return (
     <main className="mx-auto min-h-dvh w-full max-w-[480px] overflow-x-clip bg-background pb-52 text-foreground">
-      <header className="sticky top-0 z-30 flex items-center bg-background px-5 pb-2 pt-3">
+      <header className="sticky top-0 z-30 flex items-center bg-background px-4 pb-2 pt-3">
         <Button variant="ghost" size="icon" aria-label="Back" className="h-9 w-9 shrink-0">
           <ArrowLeft className="h-6 w-6" strokeWidth={2} />
         </Button>
@@ -55,68 +55,67 @@ function Checkout() {
         <span aria-hidden="true" className="h-9 w-9 shrink-0" />
       </header>
 
-      <section className="px-5 pt-2">
+      <section className="px-4 pt-2">
         <div className="overflow-hidden rounded-2xl">
           <img src={mapImg} alt="Map showing your delivery location" className="h-[122px] w-full object-cover" />
         </div>
 
-        <CheckoutRow icon={<img src={locationImg} alt="" />}>
+        <CheckoutRow icon={<img src={locationImg} alt="" className="h-[23px] w-[23px] object-contain" />}>
           <p className="text-[17px] font-medium leading-tight">7428 Willow Creek Dr</p>
           <p className="mt-0.5 text-[15px] text-checkout-muted">Charlotte, NC</p>
         </CheckoutRow>
         <Divider inset />
 
-        <CheckoutRow icon={<img src={userIconImg} alt="" />}>
+        <CheckoutRow icon={<img src={userIconImg} alt="" className="h-[23px] w-[23px] object-contain" />}>
           <p className="text-[17px] font-medium leading-tight">Meet at my door</p>
           <p className="mt-0.5 text-[15px] text-checkout-green">Add delivery instructions &amp; photos</p>
         </CheckoutRow>
         <Divider inset />
 
-        <CheckoutRow icon={<img src={`${mediaPath}/phone-call.png`} alt="" className="scale-125" />}>
-          <p className="text-[17px] font-medium">+16507698710</p>
+        <CheckoutRow icon={<img src={`${mediaPath}/phone-call.png`} alt="" className="h-[27px] w-[27px] object-contain" />}>
+          <p className="text-[17px] font-medium">+1 650 769 8710</p>
         </CheckoutRow>
         <Divider inset />
 
-        <div className="flex items-center justify-between py-4">
-          <div className="flex items-center gap-4">
-            <Clock3 className="h-6 w-6 text-checkout-muted" strokeWidth={1.8} />
+        <div className="flex items-center justify-between gap-3 py-4">
+          <div className="flex min-w-0 items-center gap-3">
+            <span className="flex w-9 shrink-0 justify-center"><Clock3 className="h-6 w-6 text-checkout-muted" strokeWidth={1.8} /></span>
             <span className="text-[17px] font-medium">Delivery time</span>
           </div>
-          <span className="text-[16px] font-medium text-checkout-muted">8:34–9:02 AM</span>
+          <span className="shrink-0 text-[16px] font-medium text-checkout-muted">8:34–9:02 AM</span>
         </div>
 
-        <div className="-mx-5 flex min-w-0 gap-2.5 overflow-x-auto px-5 pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        <div className="-mx-4 flex min-w-0 items-stretch gap-2.5 overflow-x-auto px-4 pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           <DeliveryOption
             selected={option === "priority"}
             onClick={() => setOption("priority")}
-            className="w-[42%] basis-[42%]"
           >
-            <div className="flex items-center gap-2 text-[16px] font-medium">
+            <div className="flex items-center gap-1.5 whitespace-nowrap text-[16px] font-medium leading-6">
               <span>8:27–8:53 AM</span>
-              <img src={priorityImg} alt="Priority" className="h-4 w-3 shrink-0 object-contain" />
+              <img src={priorityImg} alt="Priority" className="h-[18px] w-[13px] shrink-0 object-contain" />
             </div>
-            <p className="mt-1 text-[14px] text-checkout-muted">Priority</p>
-            <p className="mt-1 text-[14px] leading-6 text-checkout-green">Direct to you. Top-rated couriers</p>
-            <p className="mt-0.5 text-[14px] text-checkout-muted">+$1.49</p>
+            <p className="mt-0.5 text-[13px] leading-5 text-checkout-muted">Priority</p>
+            <p className="text-[13px] leading-5 text-checkout-green">Direct to you. Top-rated couriers</p>
+            <p className="text-[13px] leading-5 text-checkout-muted">+$1.49</p>
           </DeliveryOption>
-          <DeliveryOption selected={option === "standard"} onClick={() => setOption("standard")} className="w-[42%] basis-[42%]">
-            <p className="text-[16px] font-medium">8:34–9:02 AM</p>
-            <p className="mt-1 text-[14px] text-checkout-muted">Standard</p>
+          <DeliveryOption selected={option === "standard"} onClick={() => setOption("standard")}>
+            <p className="whitespace-nowrap text-[16px] font-medium leading-6">8:34–9:02 AM</p>
+            <p className="mt-0.5 text-[13px] leading-5 text-checkout-muted">Standard</p>
           </DeliveryOption>
-          <DeliveryOption selected={option === "schedule"} onClick={() => setOption("schedule")} className="w-[42%] basis-[42%]">
-            <p className="text-[16px] font-medium">Schedule</p>
-            <p className="mt-1 text-[14px] text-checkout-muted">Earliest: 9:18 AM</p>
+          <DeliveryOption selected={option === "schedule"} onClick={() => setOption("schedule")}>
+            <p className="whitespace-nowrap text-[16px] font-medium leading-6">Schedule</p>
+            <p className="mt-0.5 text-[13px] leading-5 text-checkout-muted">Earliest: 9:18 AM</p>
           </DeliveryOption>
         </div>
       </section>
 
       <div aria-hidden="true" className="mt-5 h-2 bg-checkout-surface" />
 
-      <section className="px-5 pt-4">
+      <section className="px-4 pt-4">
         <h2 className="text-[22px] font-semibold">Order summary</h2>
 
-        <Button variant="ghost" className="mt-3 flex h-auto w-full justify-start gap-3 px-0 py-3 text-left">
-          <img src={storeImg} alt="" className="h-11 w-11 shrink-0 rounded-full object-cover" />
+        <Button variant="ghost" className="mt-3 flex h-auto w-full justify-start gap-3 whitespace-normal px-0 py-3 text-left hover:bg-transparent">
+          <img src={storeImg} alt="" className="h-9 w-9 shrink-0 rounded-full object-cover" />
           <span className="min-w-0 flex-1">
             <span className="block text-[17px] font-medium leading-tight">McDonald&apos;s®</span>
             <span className="mt-1 block text-[16px] text-checkout-muted">15 items</span>
@@ -125,8 +124,8 @@ function Checkout() {
         </Button>
         <Divider inset />
 
-        <Button variant="ghost" className="flex h-auto w-full justify-start gap-3 px-0 py-3 text-left">
-          <img src={giftImg} alt="" className="h-11 w-11 shrink-0 object-contain" />
+        <Button variant="ghost" className="flex h-auto w-full justify-start gap-3 whitespace-normal px-0 py-3 text-left hover:bg-transparent">
+          <span className="flex w-9 shrink-0 justify-center"><img src={giftImg} alt="" className="h-[30px] w-[30px] object-contain" /></span>
           <span className="min-w-0 flex-1">
             <span className="block text-[17px] font-medium leading-tight">Send as a gift</span>
             <span className="mt-1 block text-[16px] text-checkout-muted">Add a personal message</span>
@@ -138,23 +137,23 @@ function Checkout() {
         <Button
           variant="ghost"
           onClick={() => setSheetOpen(true)}
-          className="flex h-auto w-full items-center justify-start gap-3 px-0 py-3 text-left"
+          className="flex h-auto w-full items-center justify-start gap-3 whitespace-normal px-0 py-3 text-left hover:bg-transparent"
         >
-          <span className="flex h-11 w-11 shrink-0 items-center justify-center">
-            <img src={couponImg} alt="" className="h-8 w-8 object-contain" />
+          <span className="flex w-9 shrink-0 items-center justify-center">
+            <img src={couponImg} alt="" className="h-[22px] w-[22px] object-contain" />
           </span>
           <span className="min-w-0 flex-1">
-            <span className="block text-[17px] font-medium leading-snug">2 promotions applied, 1 promotion available</span>
-            <span className="mt-1 block text-[16px] leading-snug text-checkout-muted">Discounted Service Fee on us</span>
+            <span className="block text-[17px] font-medium leading-[1.3]">2 promotions applied, 1 promotion available</span>
+            <span className="mt-1 block text-[15px] leading-snug text-checkout-muted">Discounted Service Fee on us</span>
             {codeApplied && <span className="mt-1 block text-[14px] font-medium text-checkout-green">Promo code {codeApplied} applied</span>}
           </span>
           <ChevronRight className="h-5 w-5 shrink-0 text-checkout-subtle" strokeWidth={2.4} />
         </Button>
       </section>
 
-      <Divider className="mx-5 mt-1" />
+      <Divider className="mx-4 mt-1" />
 
-      <section aria-label="Order totals" className="px-5 pt-3">
+      <section aria-label="Order totals" className="px-4 pt-3">
         <PriceRow label="Subtotal" value={money(checkoutPriceLines.subtotal)} compact />
         {codeApplied && (
           <PriceRow label="Uber Credit Applied" value={`−${money(totals.codeDiscount)}`} highlight compact />
@@ -183,10 +182,10 @@ function Checkout() {
         />
       </section>
 
-      <section className="px-5 pt-3">
-        <Button variant="ghost" className="flex h-auto w-full justify-start gap-4 px-2 py-2 text-left">
-          <img src={visaImg} alt="Visa" className="h-12 w-12 shrink-0 object-contain" />
-          <span className="min-w-0 flex-1 text-[18px] font-medium">Visa ••••5841 (Caseys)</span>
+      <section className="px-4 pt-3">
+        <Button variant="ghost" className="flex h-auto w-full items-center justify-start gap-3 whitespace-normal px-0 py-3 text-left hover:bg-transparent">
+          <span className="flex w-9 shrink-0 justify-center"><img src={visaImg} alt="Visa" className="h-[34px] w-[32px] object-contain" /></span>
+          <span className="min-w-0 flex-1 text-[17px] font-medium">Visa ••••5841 (Caseys)</span>
           <ChevronRight className="h-5 w-5 shrink-0 text-checkout-subtle" strokeWidth={2.4} />
         </Button>
 
@@ -231,8 +230,8 @@ function Checkout() {
 
 function CheckoutRow({ icon, children }: { icon: React.ReactNode; children: React.ReactNode }) {
   return (
-    <div className="flex min-h-[72px] items-center gap-4 py-3">
-      <span className="flex h-7 w-7 shrink-0 items-center justify-center text-checkout-muted [&_img]:h-7 [&_img]:w-7 [&_img]:object-contain">{icon}</span>
+    <div className="flex min-h-[70px] items-center gap-3 py-3">
+      <span className="flex w-9 shrink-0 items-center justify-center text-checkout-muted">{icon}</span>
       <div className="min-w-0 flex-1">{children}</div>
       <ChevronRight className="h-5 w-5 shrink-0 text-checkout-subtle" strokeWidth={2.4} />
     </div>
@@ -240,28 +239,27 @@ function CheckoutRow({ icon, children }: { icon: React.ReactNode; children: Reac
 }
 
 function Divider({ inset = false, className = "" }: { inset?: boolean; className?: string }) {
-  return <div aria-hidden="true" className={`h-px bg-checkout-separator ${inset ? "ml-11" : ""} ${className}`} />;
+  return <div aria-hidden="true" className={`h-px bg-checkout-separator ${inset ? "ml-12" : ""} ${className}`} />;
 }
 
 function DeliveryOption({
   selected,
   onClick,
-  className,
   children,
 }: {
   selected: boolean;
   onClick: () => void;
-  className: string;
   children: React.ReactNode;
 }) {
   return (
-    <Button
-      variant="ghost"
+    <button
+      type="button"
+      aria-pressed={selected}
       onClick={onClick}
-      className={`h-[152px] min-w-0 shrink-0 flex-col items-stretch justify-start whitespace-normal rounded-2xl border-2 px-3 py-3 text-left ${className} ${selected ? "border-foreground" : "border-checkout-separator"}`}
+      className={`flex min-h-[122px] w-[154px] shrink-0 flex-col items-stretch justify-start overflow-hidden rounded-xl bg-background px-3 py-3 text-left transition-colors ${selected ? "border-[3px] border-foreground" : "border-2 border-checkout-separator"}`}
     >
       {children}
-    </Button>
+    </button>
   );
 }
 
