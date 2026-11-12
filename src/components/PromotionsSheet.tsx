@@ -109,7 +109,7 @@ export function PromotionsSheet({
               className="min-w-0 flex-1 bg-transparent text-[17px] font-medium uppercase text-foreground placeholder:normal-case placeholder:text-checkout-muted focus:outline-none"
             />
           </label>
-          <div className="mt-auto pt-4">
+          <div className="mt-auto pb-10 pt-4">
             <Button
               onClick={handleAdd}
               disabled={!code.trim()}
