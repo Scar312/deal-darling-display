@@ -72,7 +72,7 @@ function Checkout() {
         </CheckoutRow>
         <Divider inset />
 
-        <CheckoutRow icon={<img src={`${mediaPath}/phone-call.png`} alt="" className="h-[27px] w-[27px] object-contain" />}>
+        <CheckoutRow icon={<img src={`${mediaPath}/phone-call.png`} alt="" className="h-[25px] w-[25px] object-contain" />}>
           <p className="text-[17px] font-medium">+1 650 769 8710</p>
         </CheckoutRow>
         <Divider inset />
@@ -125,7 +125,7 @@ function Checkout() {
         <Divider inset />
 
         <Button variant="ghost" className="flex h-auto w-full justify-start gap-3 whitespace-normal px-0 py-3 text-left hover:bg-transparent">
-          <span className="flex w-9 shrink-0 justify-center"><img src={giftImg} alt="" className="h-[30px] w-[30px] object-contain" /></span>
+          <span className="flex w-9 shrink-0 justify-center"><img src={giftImg} alt="" className="h-[30px] w-[27px] object-contain" /></span>
           <span className="min-w-0 flex-1">
             <span className="block text-[17px] font-medium leading-tight">Send as a gift</span>
             <span className="mt-1 block text-[16px] text-checkout-muted">Add a personal message</span>
@@ -184,7 +184,7 @@ function Checkout() {
 
       <section className="px-4 pt-3">
         <Button variant="ghost" className="flex h-auto w-full items-center justify-start gap-3 whitespace-normal px-0 py-3 text-left hover:bg-transparent">
-          <span className="flex w-9 shrink-0 justify-center"><img src={visaImg} alt="Visa" className="h-[34px] w-[32px] object-contain" /></span>
+          <span className="flex w-9 shrink-0 justify-center"><img src={visaImg} alt="Visa" className="h-[32px] w-[32px] object-contain" /></span>
           <span className="min-w-0 flex-1 text-[17px] font-medium">Visa ••••5841 (Caseys)</span>
           <ChevronRight className="h-5 w-5 shrink-0 text-checkout-subtle" strokeWidth={2.4} />
         </Button>
