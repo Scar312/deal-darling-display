@@ -64,12 +64,12 @@
 :root {
   --radius: 0.625rem;
   --background: oklch(1 0 0);
-  --foreground: oklch(0.129 0.042 264.695);
+  --foreground: oklch(0.17 0 0);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.129 0.042 264.695);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.129 0.042 264.695);
-  --primary: oklch(0.208 0.042 265.755);
+  --primary: oklch(0.17 0 0);
   --primary-foreground: oklch(0.984 0.003 247.858);
   --secondary: oklch(0.968 0.007 247.896);
   --secondary-foreground: oklch(0.208 0.042 265.755);
@@ -106,6 +106,7 @@
   --checkout-savings-end: oklch(0.89 0.08 25);
   --checkout-savings-applied: oklch(0.93 0.045 158);
   --checkout-badge-green-filter: hue-rotate(125deg) saturate(0.65);
+  --checkout-letter-spacing: 0;
 }
 
 .dark {
@@ -186,6 +187,7 @@
     font-family: "Public Sans", ui-sans-serif, system-ui, sans-serif;
     font-weight: 400;
     font-stretch: 100%;
+    letter-spacing: var(--checkout-letter-spacing);
     -webkit-font-smoothing: antialiased;
   }
 }
