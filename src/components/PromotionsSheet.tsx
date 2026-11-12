@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import { ArrowLeft, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-const burgerImg = "/assets/burger.jpg";
-const saladImg = "/assets/salad-promo.png";
+const mediaPath = "/assets/all-images/png/media";
+const burgerImg = `${mediaPath}/burger.jpg`;
+const saladImg = `${mediaPath}/salad-promo.png`;
 
 interface PromotionsSheetProps {
   open: boolean;
@@ -131,14 +132,14 @@ export function PromotionsSheet({
           {codeApplied && (
             <div className="mt-4 flex items-center justify-between gap-3 border-y border-checkout-separator py-4">
               <div>
-                <div className="text-[16px] font-medium text-checkout-red">Promo code applied</div>
+                <div className="text-[16px] font-medium text-checkout-green">Promo code applied</div>
                 <div className="mt-1 text-[14px] text-checkout-muted">Code: {codeApplied} · 87% off</div>
               </div>
               <Button
                 variant="link"
                 tabIndex={open ? 0 : -1}
                 onClick={onRemoveCode}
-                className="px-2 text-[14px] font-medium text-checkout-red"
+                className="px-2 text-[14px] font-medium text-checkout-green"
               >
                 Remove
               </Button>

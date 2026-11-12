@@ -1,4 +1,4 @@
 - [x] Match the checkout delivery, order summary, fee breakdown, and savings bar to the uploaded references.
 - [x] Rebuild the promotions sheet to match its references while retaining promo entry and selection interactions.
 - [x] Verify displayed totals, promo calculations, and the mobile preview.
-- [ ] Organize checkout images under `public/assets/all-images/png/media`, improve mobile alignment, and use green applied-promo accents.
+- [x] Organize checkout images under `public/assets/all-images/png/media`, improve mobile alignment, and use green applied-promo accents.
